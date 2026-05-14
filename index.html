@@ -16,15 +16,12 @@
       --soft-strong: rgba(255, 252, 245, 0.82);
       --red: #a83a2d;
       --brass: #a98245;
-      --grey: #a7a39b;
       --shadow: 0 24px 70px rgba(41, 31, 20, 0.15);
       --radius-lg: 34px;
-      --radius-md: 22px;
       --max: 1180px;
     }
 
     * { box-sizing: border-box; }
-
     html { scroll-behavior: smooth; }
 
     body {
@@ -64,14 +61,7 @@
     }
 
     a { color: inherit; }
-
-    button, input, textarea {
-      font: inherit;
-    }
-
-    .serif {
-      font-family: ui-serif, Georgia, Cambria, "Times New Roman", serif;
-    }
+    button, input, textarea { font: inherit; }
 
     .site-shell {
       position: relative;
@@ -96,7 +86,6 @@
       display: inline-flex;
       flex-direction: column;
       width: max-content;
-      text-decoration: none;
       line-height: 1;
     }
 
@@ -127,7 +116,9 @@
 
     .language-switch button,
     .top-links button,
-    .filter-button {
+    .filter-button,
+    .back-button,
+    .close-button {
       border: 0;
       cursor: pointer;
       color: var(--ink);
@@ -239,6 +230,7 @@
       font-family: ui-serif, Georgia, Cambria, "Times New Roman", serif;
       font-size: 20px;
       line-height: 1.35;
+      white-space: pre-line;
     }
 
     .layout {
@@ -265,10 +257,7 @@
       text-transform: uppercase;
     }
 
-    .filter-list {
-      display: grid;
-      gap: 7px;
-    }
+    .filter-list { display: grid; gap: 7px; }
 
     .filter-button {
       width: 100%;
@@ -284,9 +273,7 @@
     }
 
     .filter-button:hover,
-    .filter-button.active {
-      color: var(--ink);
-    }
+    .filter-button.active { color: var(--ink); }
 
     .filter-button.active .dot {
       background: var(--red);
@@ -358,13 +345,8 @@
       transition: transform .35s ease, box-shadow .35s ease, background .35s ease;
     }
 
-    .post-card:nth-child(even) {
-      grid-template-columns: minmax(0, 1.1fr) minmax(230px, .85fr);
-    }
-
-    .post-card:nth-child(even) .post-media {
-      order: 2;
-    }
+    .post-card:nth-child(even) { grid-template-columns: minmax(0, 1.1fr) minmax(230px, .85fr); }
+    .post-card:nth-child(even) .post-media { order: 2; }
 
     .post-card:hover {
       transform: translateY(-6px);
@@ -392,9 +374,7 @@
       transition: transform .5s ease;
     }
 
-    .post-card:hover img {
-      transform: scale(1.055);
-    }
+    .post-card:hover img { transform: scale(1.055); }
 
     .placeholder-art {
       position: absolute;
@@ -410,7 +390,7 @@
     }
 
     .placeholder-art span {
-      max-width: 210px;
+      max-width: 230px;
       color: rgba(23,19,15,.46);
       font-family: ui-serif, Georgia, Cambria, "Times New Roman", serif;
       font-size: 24px;
@@ -446,12 +426,7 @@
       line-height: 1.36;
     }
 
-    .tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 7px;
-      margin-top: 22px;
-    }
+    .tags { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 22px; }
 
     .tag {
       padding: 6px 9px;
@@ -473,10 +448,7 @@
       text-transform: uppercase;
     }
 
-    .read-more::after {
-      content: "→";
-      transform: translateY(-1px);
-    }
+    .read-more::after { content: "→"; transform: translateY(-1px); }
 
     .detail-view {
       display: none;
@@ -497,7 +469,6 @@
       padding: 10px 14px;
       color: var(--muted);
       background: rgba(255,255,255,.22);
-      cursor: pointer;
       font-size: 13px;
       letter-spacing: .08em;
       text-transform: uppercase;
@@ -511,6 +482,8 @@
     }
 
     .detail-main-image {
+      position: relative;
+      min-height: 420px;
       border-radius: var(--radius-lg);
       overflow: hidden;
       border: 1px solid var(--faint);
@@ -525,11 +498,7 @@
       object-fit: cover;
     }
 
-    .detail-info {
-      position: sticky;
-      top: 116px;
-      padding-top: 10px;
-    }
+    .detail-info { position: sticky; top: 116px; padding-top: 10px; }
 
     .detail-title {
       margin: 0 0 18px;
@@ -570,9 +539,7 @@
       line-height: 1.55;
     }
 
-    .haiku {
-      white-space: pre-line;
-    }
+    .haiku { white-space: pre-line; }
 
     .gallery-strip {
       display: grid;
@@ -658,7 +625,6 @@
       width: 38px;
       height: 38px;
       background: rgba(255,255,255,.25);
-      cursor: pointer;
     }
 
     .modal p {
@@ -688,80 +654,23 @@
     .empty-state.active { display: block; }
 
     @media (max-width: 920px) {
-      .topbar {
-        grid-template-columns: 1fr auto;
-      }
-
-      .language-switch {
-        grid-column: 2;
-        grid-row: 1;
-      }
-
-      .top-links {
-        grid-column: 1 / -1;
-        justify-self: start;
-        flex-wrap: wrap;
-      }
-
-      .hero,
-      .layout,
-      .detail-hero {
-        grid-template-columns: 1fr;
-      }
-
-      .hero {
-        padding-top: 54px;
-      }
-
-      .side-panel {
-        position: relative;
-        top: auto;
-        display: block;
-      }
-
-      .filter-list {
-        display: flex;
-        gap: 9px;
-        overflow-x: auto;
-        padding-bottom: 6px;
-      }
-
-      .filter-button {
-        width: auto;
-        flex: 0 0 auto;
-        gap: 8px;
-        padding: 9px 12px;
-        border: 1px solid var(--faint);
-        border-radius: 999px;
-        background: rgba(255,255,255,.2);
-      }
-
+      .topbar { grid-template-columns: 1fr auto; }
+      .language-switch { grid-column: 2; grid-row: 1; }
+      .top-links { grid-column: 1 / -1; justify-self: start; flex-wrap: wrap; }
+      .hero, .layout, .detail-hero { grid-template-columns: 1fr; }
+      .hero { padding-top: 54px; }
+      .side-panel { position: relative; top: auto; display: block; }
+      .filter-list { display: flex; gap: 9px; overflow-x: auto; padding-bottom: 6px; }
+      .filter-button { width: auto; flex: 0 0 auto; gap: 8px; padding: 9px 12px; border: 1px solid var(--faint); border-radius: 999px; background: rgba(255,255,255,.2); }
       .mini-note { display: none; }
-
-      .post-card,
-      .post-card:nth-child(even) {
-        grid-template-columns: 1fr;
-      }
-
-      .post-card:nth-child(even) .post-media {
-        order: 0;
-      }
-
-      .detail-info {
-        position: relative;
-        top: auto;
-      }
-
-      .gallery-strip {
-        grid-template-columns: 1fr 1fr;
-      }
+      .post-card, .post-card:nth-child(even) { grid-template-columns: 1fr; }
+      .post-card:nth-child(even) .post-media { order: 0; }
+      .detail-info { position: relative; top: auto; }
+      .gallery-strip { grid-template-columns: 1fr 1fr; }
     }
 
     @media (max-width: 560px) {
-      .topbar {
-        padding: 14px;
-      }
-
+      .topbar { padding: 14px; }
       .brand-main { font-size: 22px; }
       .top-links { gap: 10px; }
       .hero-card { transform: none; }
@@ -775,8 +684,8 @@
   <div class="site-shell" id="app">
     <header class="topbar">
       <div class="brand" aria-label="Muratomo Haiku">
-        <span class="brand-main">Muratomo Haiku</span>
-        <span class="brand-sub" data-i18n="brandSub">çizimler · notlar · küçük yansımalar</span>
+        <span class="brand-main" id="brandName">Muratomo Haiku</span>
+        <span class="brand-sub" id="brandSub">çizimler · notlar · küçük yansımalar</span>
       </div>
 
       <div class="language-switch" aria-label="Language switch">
@@ -784,44 +693,41 @@
         <button type="button" data-lang-button="en">EN</button>
       </div>
 
-      <nav class="top-links" aria-label="Site links">
-        <button type="button" data-page="info">Info</button>
-        <button type="button" data-page="about">About</button>
-        <button type="button" data-page="privacy">Privacy Policy</button>
-        <button type="button" data-page="contact">Contact</button>
-      </nav>
+      <nav class="top-links" aria-label="Site links" id="topLinks"></nav>
     </header>
 
     <main id="homeView">
       <section class="hero" aria-label="Intro">
         <div>
-          <span class="hero-kicker" data-i18n="heroKicker">analog arşiv / dijital oda</span>
-          <h1>Muratomo<br>Haiku</h1>
-          <p class="hero-copy" data-i18n="heroCopy">Masa üstünde kalan çizimler, dövüş notları, objeler, teknik denemeler ve hayatın küçük yankıları.</p>
+          <span class="hero-kicker" id="heroKicker">analog arşiv / dijital oda</span>
+          <h1 id="heroTitle">Muratomo<br>Haiku</h1>
+          <p class="hero-copy" id="heroCopy">Masa üstünde kalan çizimler, dövüş notları, objeler, teknik denemeler ve hayatın küçük yankıları.</p>
         </div>
 
         <aside class="hero-card" aria-label="Featured note">
           <div class="hero-card-inner">
-            <div class="hero-card-title">Atemi<br>Zone</div>
-            <div class="hero-card-note" data-i18n="heroNote">kırmızı halka / el durmadan önce / mesafe konuşur</div>
+            <div class="hero-card-title" id="featuredTitle">Muratomo<br>Haiku</div>
+            <div class="hero-card-note" id="featuredNote">boş bir sayfa
+yeni izleri bekler
+sessizce</div>
           </div>
         </aside>
       </section>
 
       <section class="layout" aria-label="Post stream">
         <aside class="side-panel">
-          <div class="side-title" data-i18n="filterTitle">Kılavuz kelimeler</div>
+          <div class="side-title" id="filterTitle">Kılavuz kelimeler</div>
           <div class="filter-list" id="filterList"></div>
-          <div class="mini-note" data-i18n="sideNote">Kategoriler değil; izler. Bir kelimeye dokununca akış sadece o ruh halindeki işleri gösterir.</div>
+          <div class="mini-note" id="sideNote">Kategoriler değil; izler. Bir kelimeye dokununca akış sadece o ruh halindeki işleri gösterir.</div>
         </aside>
 
         <div class="stream">
           <div class="stream-head">
             <h2 class="stream-title" id="streamTitle">Akış</h2>
-            <div class="stream-count" id="streamCount">0 entries</div>
+            <div class="stream-count" id="streamCount">0 iz</div>
           </div>
           <div class="posts" id="posts"></div>
-          <div class="empty-state" id="emptyState" data-i18n="emptyState">Bu etikette henüz bir iz yok.</div>
+          <div class="empty-state active" id="emptyState">Henüz bir iz yok. /admin alanından ilk gönderiyi ekle.</div>
         </div>
       </section>
     </main>
@@ -829,7 +735,7 @@
     <main class="detail-view" id="detailView" aria-live="polite"></main>
 
     <footer class="footer">
-      <div>Muratomo Haiku · <span data-i18n="footerLine">çizimler, notlar ve küçük yansımalar</span></div>
+      <div>Muratomo Haiku · <span id="footerLine">çizimler, notlar ve küçük yansımalar</span></div>
       <div>© Murat Akcayigit</div>
     </footer>
   </div>
@@ -845,291 +751,170 @@
   </div>
 
   <script>
-    const siteText = {
-      tr: {
-        brandSub: "çizimler · notlar · küçük yansımalar",
-        heroKicker: "analog arşiv / dijital oda",
-        heroCopy: "Masa üstünde kalan çizimler, dövüş notları, objeler, teknik denemeler ve hayatın küçük yankıları.",
-        heroNote: "kırmızı halka / el durmadan önce / mesafe konuşur",
-        filterTitle: "Kılavuz kelimeler",
-        sideNote: "Kategoriler değil; izler. Bir kelimeye dokununca akış sadece o ruh halindeki işleri gösterir.",
-        stream: "Akış",
-        entries: "iz",
-        all: "Hepsi",
-        emptyState: "Bu etikette henüz bir iz yok.",
-        readMore: "içine gir",
-        back: "akışa dön",
-        technique: "Teknik",
-        reflection: "Yansıma",
-        haiku: "Haiku",
-        gallery: "Yakın izler",
-        footerLine: "çizimler, notlar ve küçük yansımalar",
-        pages: {
-          info: {
-            title: "Info",
-            body: `<p><strong>Muratomo Haiku</strong>, kategori mantığından çok iz mantığıyla çalışan kişisel bir akış. Soldaki kelimeler birer klasör değil; ruh hali, konu ve teknik işareti.</p><p>Yeni işler en üstte görünür. Bir gönderiye tıklayınca görsel, teknik, yansıma ve haiku alanlarıyla daha sakin bir detay sayfası açılır.</p>`
-          },
-          about: {
-            title: "About",
-            body: `<p>Muratomo Haiku, Murat'ın çizim, not, obje, dövüş sanatı çalışmaları ve kısa iç yansımaları için sessiz bir dijital oda.</p><p>Bazı işler tamamlanmış eserlerdir. Bazıları yalnızca bir masada kalmış izlerdir.</p>`
-          },
-          privacy: {
-            title: "Privacy Policy",
-            body: `<p>Bu ilk taslak herhangi bir takip çerezi, üyelik sistemi veya reklam ağı kullanmaz.</p><p>İleride iletişim formu, analiz aracı veya bülten eklenirse bu sayfa güncellenmelidir.</p>`
-          },
-          contact: {
-            title: "Contact",
-            body: `<p>İletişim için buraya e-posta, Instagram veya tercih edilen bir bağlantı eklenebilir.</p><p>Örnek: <code>hello@muratomohaiku.com</code></p>`
-          }
-        }
+    const defaultSiteData = {
+      site: {
+        brand_name: "Muratomo Haiku",
+        brand_sub: { tr: "çizimler · notlar · küçük yansımalar", en: "drawings · notes · small reflections" },
+        hero_kicker: { tr: "analog arşiv / dijital oda", en: "analog archive / digital room" },
+        hero_copy: { tr: "Masa üstünde kalan çizimler, dövüş notları, objeler, teknik denemeler ve hayatın küçük yankıları.", en: "Drawings left on the desk, martial notes, objects, technique studies, and small echoes from life." },
+        featured_title: "Muratomo
+Haiku",
+        featured_note: { tr: "boş bir sayfa
+yeni izleri bekler
+sessizce", en: "an empty page
+waits for new traces
+quietly" },
+        filter_title: { tr: "Kılavuz kelimeler", en: "Guide words" },
+        side_note: { tr: "Kategoriler değil; izler. Bir kelimeye dokununca akış sadece o ruh halindeki işleri gösterir.", en: "Not categories; traces. Touching a word narrows the stream to that mood, material, or question." },
+        stream_title: { tr: "Akış", en: "Stream" },
+        empty_state: { tr: "Henüz bir iz yok. /admin alanından ilk gönderiyi ekle.", en: "No traces yet. Add the first entry from /admin." },
+        read_more: { tr: "içine gir", en: "enter" },
+        back: { tr: "akışa dön", en: "back to stream" },
+        entries: { tr: "iz", en: "entries" },
+        footer_line: { tr: "çizimler, notlar ve küçük yansımalar", en: "drawings, notes, and small reflections" }
       },
-      en: {
-        brandSub: "drawings · notes · small reflections",
-        heroKicker: "analog archive / digital room",
-        heroCopy: "Drawings left on the desk, martial notes, objects, technique studies, and small echoes from life.",
-        heroNote: "red circle / before the hand moves / distance speaks",
-        filterTitle: "Guide words",
-        sideNote: "Not categories; traces. Touching a word narrows the stream to that mood, material, or question.",
-        stream: "Stream",
-        entries: "entries",
-        all: "All",
-        emptyState: "There is no trace under this word yet.",
-        readMore: "enter",
-        back: "back to stream",
-        technique: "Technique",
-        reflection: "Reflection",
-        haiku: "Haiku",
-        gallery: "Close traces",
-        footerLine: "drawings, notes, and small reflections",
-        pages: {
-          info: {
-            title: "Info",
-            body: `<p><strong>Muratomo Haiku</strong> is a personal stream organized by traces rather than strict categories. The words on the left are not folders; they are moods, subjects, and material signals.</p><p>New entries appear first. Clicking an entry opens a quieter detail page with image, technique, reflection, and haiku.</p>`
-          },
-          about: {
-            title: "About",
-            body: `<p>Muratomo Haiku is a quiet digital room for Murat's drawings, notes, objects, martial art studies, and short inner reflections.</p><p>Some works are finished pieces. Some are only traces left on a desk.</p>`
-          },
-          privacy: {
-            title: "Privacy Policy",
-            body: `<p>This first prototype does not use tracking cookies, member accounts, or ad networks.</p><p>If a contact form, analytics, or newsletter is added later, this page should be updated.</p>`
-          },
-          contact: {
-            title: "Contact",
-            body: `<p>Add an email, Instagram, or preferred contact link here.</p><p>Example: <code>hello@muratomohaiku.com</code></p>`
-          }
-        }
+      nav: {
+        info: { tr: "Bilgi", en: "Info" },
+        about: { tr: "Hakkında", en: "About" },
+        privacy: { tr: "Gizlilik", en: "Privacy Policy" },
+        contact: { tr: "İletişim", en: "Contact" }
+      },
+      section_labels: {
+        technique: { tr: "Teknik", en: "Technique" },
+        reflection: { tr: "Yansıma", en: "Reflection" },
+        haiku: { tr: "Haiku", en: "Haiku" },
+        gallery: { tr: "Yakın izler", en: "Close traces" }
+      },
+      filters: [
+        { id: "all", tr: "Hepsi", en: "All" },
+        { id: "martial", tr: "Dövüş Sanatları", en: "Martial Arts" },
+        { id: "life", tr: "Hayat", en: "Life" },
+        { id: "emotions", tr: "Duygular", en: "Emotions" },
+        { id: "objects", tr: "Objeler", en: "Objects" },
+        { id: "sketch", tr: "Eskiz", en: "Sketch" },
+        { id: "technique", tr: "Teknik", en: "Technique" },
+        { id: "haiku", tr: "Haiku", en: "Haiku" }
+      ],
+      pages: {
+        info: { title: { tr: "Bilgi", en: "Info" }, body: { tr: "<p>Muratomo Haiku, kategori mantığından çok iz mantığıyla çalışan kişisel bir akış.</p>", en: "<p>Muratomo Haiku is a personal stream organized by traces rather than strict categories.</p>" } },
+        about: { title: { tr: "Hakkında", en: "About" }, body: { tr: "<p>Muratomo Haiku, Murat'ın çizim, not, obje ve kısa iç yansımaları için sessiz bir dijital oda.</p>", en: "<p>Muratomo Haiku is a quiet digital room for Murat's drawings, notes, objects, and short inner reflections.</p>" } },
+        privacy: { title: { tr: "Gizlilik", en: "Privacy Policy" }, body: { tr: "<p>Bu site ilk halinde takip çerezi, üyelik sistemi veya reklam ağı kullanmaz.</p>", en: "<p>This site does not use tracking cookies, member accounts, or ad networks in its first version.</p>" } },
+        contact: { title: { tr: "İletişim", en: "Contact" }, body: { tr: "<p>İletişim bilgileri buraya eklenecek.</p>", en: "<p>Contact details will be added here.</p>" } }
       }
     };
 
-    const filters = [
-      { id: "all", tr: "Hepsi", en: "All" },
-      { id: "martial", tr: "Dövüş Sanatları", en: "Martial Arts" },
-      { id: "life", tr: "Hayat", en: "Life" },
-      { id: "emotions", tr: "Duygular", en: "Emotions" },
-      { id: "objects", tr: "Objeler", en: "Objects" },
-      { id: "sketch", tr: "Eskiz", en: "Sketch" },
-      { id: "technique", tr: "Teknik", en: "Technique" },
-      { id: "haiku", tr: "Haiku", en: "Haiku" }
-    ];
+    const defaultPostsData = { posts: [] };
 
-    const posts = [
-      {
-        id: "atemi-zone",
-        date: "2026-05-14",
-        tags: ["martial", "sketch", "life", "haiku"],
-        image: "assets/atemi-zone.jpg",
-        title: { tr: "Atemi Zone", en: "Atemi Zone" },
-        summary: {
-          tr: "Mesafe, niyet ve hareket öncesi sessizlik üzerine kırmızı halkalı bir çalışma.",
-          en: "A red-ring study on distance, intention, and the silence before movement."
-        },
-        technique: {
-          tr: "Kâğıt üzerine karışık teknik: marker, mürekkep, suluboya izi ve el yazısı notlar.",
-          en: "Mixed media on paper: marker, ink, watercolor traces, and handwritten notes."
-        },
-        reflection: {
-          tr: "Bu çizimde ilgimi çeken şey vuruşun kendisi değil, vuruştan önceki boşluktu. Bazen çizgi de hareket gibi davranıyor; niyet görünmeden önce alanı işaretliyor.",
-          en: "What interested me here was not the strike itself, but the space before it. Sometimes a line behaves like movement; it marks the field before intention becomes visible."
-        },
-        haiku: {
-          tr: "kırmızı halka
-el durmadan önce
-mesafe konuşur",
-          en: "red circle
-before the hand moves
-distance speaks"
-        }
-      },
-      {
-        id: "grey-map-blossoms",
-        date: "2026-05-10",
-        tags: ["sketch", "emotions", "haiku"],
-        image: "assets/grey-map-blossoms.jpg",
-        title: { tr: "Gri Harita, Kırmızı Çiçek", en: "Grey Map, Red Blossoms" },
-        summary: {
-          tr: "Defter sayfasında küçük bir yol, birkaç kırmızı çiçek ve kenarda kalmış notlar.",
-          en: "A small road on a notebook page, a few red blossoms, and notes left at the edge."
-        },
-        technique: {
-          tr: "Spiral defter üzerine ince kalem, gri yıkama, kırmızı vurgu ve yazı katmanları.",
-          en: "Fine pen, grey wash, red accents, and writing layers on a spiral notebook page."
-        },
-        reflection: {
-          tr: "Bir sayfanın tamamı dolduğunda bile bazı boşluklar kalıyor. Galiba o boşluklar çizimin nefes aldığı yerler.",
-          en: "Even when a page feels full, some spaces remain. Maybe those are the places where the drawing breathes."
-        },
-        haiku: {
-          tr: "gri bir sabah
-kırmızı çiçek açar
-yol kenarında",
-          en: "grey morning
-red blossoms appear
-beside the road"
-        }
-      },
-      {
-        id: "owl-bookmark",
-        date: "2026-05-06",
-        tags: ["objects", "sketch", "life"],
-        image: "assets/owl-bookmark.jpg",
-        title: { tr: "Baykuş Ayraç", en: "Owl Bookmark" },
-        summary: {
-          tr: "Uzun, dar bir kâğıtta duran baykuş; okuma, bekleme ve gece fikri üzerine küçük bir iz.",
-          en: "An owl on a narrow strip of paper; a small trace about reading, waiting, and the idea of night."
-        },
-        technique: {
-          tr: "Küçük format üzerinde suluboya, mürekkep çizgisi ve el yazısı cümleler.",
-          en: "Watercolor, ink line, and handwritten sentences on a small vertical format."
-        },
-        reflection: {
-          tr: "Bazı işler resimden çok eşya gibi hissettiriyor. Bu ayraç da defterin içinde saklanan küçük bir gece gibi.",
-          en: "Some works feel more like objects than images. This bookmark feels like a small night kept inside a notebook."
-        },
-        haiku: {
-          tr: "ince kâğıtta
-bir baykuş bekliyor
-sayfa kararır",
-          en: "on thin paper
-an owl waits quietly
-the page grows dark"
-        }
-      },
-      {
-        id: "small-objects",
-        date: "2026-05-02",
-        tags: ["objects", "life", "emotions"],
-        image: "assets/small-objects.jpg",
-        title: { tr: "Küçük Objeler", en: "Small Objects" },
-        summary: {
-          tr: "Taş, pirinç obje ve masada kalmış formlar: gündelik nesnelerin sessiz düzeni.",
-          en: "Stone, brass object, and forms left on the desk: the quiet order of daily objects."
-        },
-        technique: {
-          tr: "Fotoğraf, gözlem ve ileride çizime dönüşebilecek nesne arşivi.",
-          en: "Photography, observation, and an object archive that may later turn into drawings."
-        },
-        reflection: {
-          tr: "Objeler bazen yapılmış şeyler gibi değil, bulunmuş cümleler gibi duruyor. Masada sessizce bekliyorlar.",
-          en: "Objects sometimes feel less like made things and more like found sentences. They wait quietly on the desk."
-        },
-        haiku: {
-          tr: "küçük bir taş
-pirinç gövdenin yanında
-zaman ağırdır",
-          en: "a small stone
-beside a brass body
-time feels heavy"
-        }
-      },
-      {
-        id: "desk-device-note",
-        date: "2026-04-29",
-        tags: ["technique", "objects", "sketch"],
-        image: "assets/desk-device-note.jpg",
-        title: { tr: "Masa Üstü Deneme", en: "Desk Test" },
-        summary: {
-          tr: "Kablo, ölçüm, küçük cihaz ve defter: teknik düşüncenin gündelik masadaki hali.",
-          en: "Cables, measuring, a small device, and a notebook: technical thought on an everyday desk."
-        },
-        technique: {
-          tr: "Süreç fotoğrafı; obje, elektronik ve not almanın aynı kompozisyonda buluşması.",
-          en: "Process photograph; object, electronics, and note-taking meeting in the same composition."
-        },
-        reflection: {
-          tr: "Teknik olan şey de şiirsel olabilir. Özellikle kablolar, sayılar ve eller aynı anda görünüyorsa.",
-          en: "Technical things can also be poetic, especially when cables, numbers, and hands appear together."
-        },
-        haiku: {
-          tr: "küçük ekranda
-bir sayı yanıp söner
-el not alırken",
-          en: "on a small screen
-a number flickers softly
-while the hand writes"
-        }
-      }
-    ];
-
+    let siteData = defaultSiteData;
+    let postsData = defaultPostsData;
     let currentLang = "tr";
     let currentFilter = "all";
 
-    const homeView = document.querySelector("#homeView");
-    const detailView = document.querySelector("#detailView");
-    const filterList = document.querySelector("#filterList");
-    const postsEl = document.querySelector("#posts");
-    const streamTitle = document.querySelector("#streamTitle");
-    const streamCount = document.querySelector("#streamCount");
-    const emptyState = document.querySelector("#emptyState");
-    const modalBackdrop = document.querySelector("#modalBackdrop");
-    const modalTitle = document.querySelector("#modalTitle");
-    const modalBody = document.querySelector("#modalBody");
+    const qs = (selector) => document.querySelector(selector);
+    const homeView = qs("#homeView");
+    const detailView = qs("#detailView");
+    const filterList = qs("#filterList");
+    const postsEl = qs("#posts");
+    const streamTitle = qs("#streamTitle");
+    const streamCount = qs("#streamCount");
+    const emptyState = qs("#emptyState");
+    const modalBackdrop = qs("#modalBackdrop");
+    const modalTitle = qs("#modalTitle");
+    const modalBody = qs("#modalBody");
+    const topLinks = qs("#topLinks");
 
-    const formatDate = (dateString) => {
+    const t = (obj, fallback = "") => {
+      if (typeof obj === "string") return obj;
+      if (!obj) return fallback;
+      return obj[currentLang] || obj.tr || obj.en || fallback;
+    };
+
+    async function loadJson(path, fallback) {
+      try {
+        const response = await fetch(`${path}?v=${Date.now()}`, { cache: "no-store" });
+        if (!response.ok) throw new Error(`Missing ${path}`);
+        return await response.json();
+      } catch (error) {
+        console.warn(error.message);
+        return fallback;
+      }
+    }
+
+    async function loadContent() {
+      const [site, posts] = await Promise.all([
+        loadJson("content/site.json", defaultSiteData),
+        loadJson("content/posts.json", defaultPostsData)
+      ]);
+      siteData = { ...defaultSiteData, ...site };
+      postsData = { ...defaultPostsData, ...posts };
+      render();
+    }
+
+    function formatDate(dateString) {
+      if (!dateString) return "";
       const date = new Date(`${dateString}T12:00:00`);
       return new Intl.DateTimeFormat(currentLang === "tr" ? "tr-TR" : "en-US", {
         day: "2-digit",
         month: "short",
         year: "numeric"
       }).format(date);
-    };
+    }
 
-    const labelForFilter = (id) => {
-      const filter = filters.find((item) => item.id === id);
-      return filter ? filter[currentLang] : id;
-    };
+    function labelForFilter(id) {
+      const filter = siteData.filters.find((item) => item.id === id);
+      return filter ? t(filter, id) : id;
+    }
 
-    const placeholder = (label) => `
-      <div class="placeholder-art" aria-hidden="true">
-        <span>${label}<br><small style="font-size:13px; letter-spacing:.08em; text-transform:uppercase;">image placeholder</small></span>
-      </div>
-    `;
+    function placeholder(label) {
+      return `<div class="placeholder-art" aria-hidden="true"><span>${label || "Muratomo Haiku"}<br><small style="font-size:13px; letter-spacing:.08em; text-transform:uppercase;">image placeholder</small></span></div>`;
+    }
 
-    const imageMarkup = (post, className = "") => `
-      <img class="${className}" src="${post.image}" alt="${post.title[currentLang]}" onerror="this.style.display='none'; this.insertAdjacentHTML('afterend', \`${placeholder(post.title[currentLang])}\`);" />
-    `;
+    function imageMarkup(src, alt) {
+      if (!src) return placeholder(alt);
+      return `<img src="${src}" alt="${alt || "Muratomo Haiku image"}" onerror="this.style.display='none'; this.insertAdjacentHTML('afterend', \`${placeholder(alt)}\`);" />`;
+    }
 
-    function applyText() {
-      const text = siteText[currentLang];
+    function activePosts() {
+      return (postsData.posts || [])
+        .filter((post) => post && post.visible !== false)
+        .sort((a, b) => String(b.date || "").localeCompare(String(a.date || "")))
+        .filter((post) => currentFilter === "all" || (post.tags || []).includes(currentFilter));
+    }
+
+    function updateStaticText() {
+      const site = siteData.site;
+      qs("#brandName").textContent = site.brand_name || "Muratomo Haiku";
+      qs("#brandSub").textContent = t(site.brand_sub);
+      qs("#heroKicker").textContent = t(site.hero_kicker);
+      qs("#heroTitle").innerHTML = (site.brand_name || "Muratomo Haiku").replace(" ", "<br>");
+      qs("#heroCopy").textContent = t(site.hero_copy);
+      qs("#featuredTitle").innerHTML = String(site.featured_title || "Muratomo
+Haiku").replace(/
+/g, "<br>");
+      qs("#featuredNote").textContent = t(site.featured_note);
+      qs("#filterTitle").textContent = t(site.filter_title);
+      qs("#sideNote").textContent = t(site.side_note);
+      qs("#footerLine").textContent = t(site.footer_line);
       document.documentElement.lang = currentLang;
       document.documentElement.dataset.lang = currentLang;
-      document.querySelectorAll("[data-i18n]").forEach((node) => {
-        const key = node.dataset.i18n;
-        if (text[key]) node.textContent = text[key];
-      });
       document.querySelectorAll("[data-lang-button]").forEach((button) => {
         button.classList.toggle("active", button.dataset.langButton === currentLang);
       });
     }
 
+    function renderTopLinks() {
+      const order = ["info", "about", "privacy", "contact"];
+      topLinks.innerHTML = order.map((key) => `<button type="button" data-page="${key}">${t(siteData.nav[key], key)}</button>`).join("");
+      topLinks.querySelectorAll("[data-page]").forEach((button) => button.addEventListener("click", () => openModal(button.dataset.page)));
+    }
+
     function renderFilters() {
-      filterList.innerHTML = filters.map((filter) => `
+      filterList.innerHTML = siteData.filters.map((filter) => `
         <button class="filter-button ${currentFilter === filter.id ? "active" : ""}" type="button" data-filter="${filter.id}">
-          <span>${filter[currentLang]}</span>
+          <span>${t(filter, filter.id)}</span>
           <span class="dot" aria-hidden="true"></span>
         </button>
       `).join("");
-
       filterList.querySelectorAll("[data-filter]").forEach((button) => {
         button.addEventListener("click", () => {
           currentFilter = button.dataset.filter;
@@ -1138,40 +923,34 @@ while the hand writes"
       });
     }
 
-    function filteredPosts() {
-      return posts
-        .slice()
-        .sort((a, b) => b.date.localeCompare(a.date))
-        .filter((post) => currentFilter === "all" || post.tags.includes(currentFilter));
-    }
-
     function renderPosts() {
-      const text = siteText[currentLang];
-      const visible = filteredPosts();
-      streamTitle.textContent = currentFilter === "all" ? text.stream : labelForFilter(currentFilter);
-      streamCount.textContent = `${visible.length} ${text.entries}`;
+      const visible = activePosts();
+      streamTitle.textContent = currentFilter === "all" ? t(siteData.site.stream_title) : labelForFilter(currentFilter);
+      streamCount.textContent = `${visible.length} ${t(siteData.site.entries)}`;
+      emptyState.textContent = t(siteData.site.empty_state);
       emptyState.classList.toggle("active", visible.length === 0);
 
-      postsEl.innerHTML = visible.map((post) => `
-        <article class="post-card" tabindex="0" role="button" data-post-id="${post.id}" aria-label="${post.title[currentLang]}">
-          <div class="post-media">
-            ${imageMarkup(post)}
-          </div>
-          <div class="post-content">
-            <div class="post-meta">
-              <span>${formatDate(post.date)}</span>
-              <span>·</span>
-              <span>${post.tags.map(labelForFilter).slice(0, 2).join(" / ")}</span>
+      postsEl.innerHTML = visible.map((post) => {
+        const title = t(post.title, "Untitled");
+        const summary = t(post.summary);
+        const tags = post.tags || [];
+        return `
+          <article class="post-card" tabindex="0" role="button" data-post-id="${post.id}" aria-label="${title}">
+            <div class="post-media">${imageMarkup(post.cover_image, title)}</div>
+            <div class="post-content">
+              <div class="post-meta">
+                <span>${formatDate(post.date)}</span>
+                <span>·</span>
+                <span>${tags.map(labelForFilter).slice(0, 2).join(" / ")}</span>
+              </div>
+              <h3 class="post-title">${title}</h3>
+              <p class="post-summary">${summary}</p>
+              <div class="tags">${tags.map((tag) => `<span class="tag">#${labelForFilter(tag)}</span>`).join("")}</div>
+              <span class="read-more">${t(siteData.site.read_more)}</span>
             </div>
-            <h3 class="post-title">${post.title[currentLang]}</h3>
-            <p class="post-summary">${post.summary[currentLang]}</p>
-            <div class="tags">
-              ${post.tags.map((tag) => `<span class="tag">#${labelForFilter(tag)}</span>`).join("")}
-            </div>
-            <span class="read-more">${text.readMore}</span>
-          </div>
-        </article>
-      `).join("");
+          </article>
+        `;
+      }).join("");
 
       postsEl.querySelectorAll("[data-post-id]").forEach((card) => {
         const open = () => showDetail(card.dataset.postId);
@@ -1186,54 +965,39 @@ while the hand writes"
     }
 
     function showDetail(id) {
-      const post = posts.find((item) => item.id === id);
+      const post = (postsData.posts || []).find((item) => item.id === id);
       if (!post) return;
-      const text = siteText[currentLang];
+      const title = t(post.title, "Untitled");
+      const tags = post.tags || [];
+      const gallery = (post.gallery_images || []).filter(Boolean);
       homeView.style.display = "none";
       detailView.classList.add("active");
       detailView.innerHTML = `
-        <button class="back-button" type="button" id="backButton">← ${text.back}</button>
+        <button class="back-button" type="button" id="backButton">← ${t(siteData.site.back)}</button>
         <section class="detail-hero">
           <div>
-            <div class="detail-main-image">
-              ${imageMarkup(post)}
-            </div>
-            <div class="gallery-strip">
-              <div class="gallery-placeholder">detail image 01</div>
-              <div class="gallery-placeholder">detail image 02</div>
-              <div class="gallery-placeholder">desk / process</div>
-            </div>
+            <div class="detail-main-image">${imageMarkup(post.cover_image, title)}</div>
+            ${gallery.length ? `<div class="gallery-strip">${gallery.map((src) => imageMarkup(src, title)).join("")}</div>` : ""}
           </div>
-
           <aside class="detail-info">
-            <div class="post-meta">
-              <span>${formatDate(post.date)}</span>
-              <span>·</span>
-              <span>${post.tags.map(labelForFilter).join(" / ")}</span>
-            </div>
-            <h2 class="detail-title">${post.title[currentLang]}</h2>
-            <p class="detail-summary">${post.summary[currentLang]}</p>
-            <div class="tags">
-              ${post.tags.map((tag) => `<span class="tag">#${labelForFilter(tag)}</span>`).join("")}
-            </div>
-
-            <section class="detail-section">
-              <h3>${text.technique}</h3>
-              <p>${post.technique[currentLang]}</p>
-            </section>
-            <section class="detail-section">
-              <h3>${text.reflection}</h3>
-              <p>${post.reflection[currentLang]}</p>
-            </section>
-            <section class="detail-section">
-              <h3>${text.haiku}</h3>
-              <div class="haiku">${post.haiku[currentLang]}</div>
-            </section>
+            <div class="post-meta"><span>${formatDate(post.date)}</span><span>·</span><span>${tags.map(labelForFilter).join(" / ")}</span></div>
+            <h2 class="detail-title">${title}</h2>
+            <p class="detail-summary">${t(post.summary)}</p>
+            <div class="tags">${tags.map((tag) => `<span class="tag">#${labelForFilter(tag)}</span>`).join("")}</div>
+            ${section("technique", post.technique)}
+            ${section("reflection", post.reflection)}
+            ${section("haiku", post.haiku, true)}
           </aside>
         </section>
       `;
-      document.querySelector("#backButton").addEventListener("click", showHome);
+      qs("#backButton").addEventListener("click", showHome);
       window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function section(key, value, isHaiku = false) {
+      const content = t(value);
+      if (!content) return "";
+      return `<section class="detail-section"><h3>${t(siteData.section_labels[key], key)}</h3><${isHaiku ? "div" : "p"} class="${isHaiku ? "haiku" : ""}">${content}</${isHaiku ? "div" : "p"}></section>`;
     }
 
     function showHome() {
@@ -1244,19 +1008,18 @@ while the hand writes"
     }
 
     function openModal(page) {
-      const data = siteText[currentLang].pages[page];
+      const data = siteData.pages[page];
       if (!data) return;
-      modalTitle.textContent = data.title;
-      modalBody.innerHTML = data.body;
+      modalTitle.textContent = t(data.title, page);
+      modalBody.innerHTML = t(data.body);
       modalBackdrop.classList.add("active");
     }
 
-    function closeModal() {
-      modalBackdrop.classList.remove("active");
-    }
+    function closeModal() { modalBackdrop.classList.remove("active"); }
 
     function render() {
-      applyText();
+      updateStaticText();
+      renderTopLinks();
       renderFilters();
       renderPosts();
       if (detailView.classList.contains("active")) showHome();
@@ -1269,17 +1032,10 @@ while the hand writes"
       });
     });
 
-    document.querySelectorAll("[data-page]").forEach((button) => {
-      button.addEventListener("click", () => openModal(button.dataset.page));
-    });
+    qs("#closeModal").addEventListener("click", closeModal);
+    modalBackdrop.addEventListener("click", (event) => { if (event.target === modalBackdrop) closeModal(); });
 
-    document.querySelector("#closeModal").addEventListener("click", closeModal);
-    modalBackdrop.addEventListener("click", (event) => {
-      if (event.target === modalBackdrop) closeModal();
-    });
-
-
-    render();
+    loadContent();
   </script>
 </body>
 </html>
