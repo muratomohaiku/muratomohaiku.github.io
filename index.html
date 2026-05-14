@@ -4,6 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Muratomo Haiku</title>
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   <meta name="description" content="Drawings, notes, martial traces, objects and small reflections." />
   <style>
     :root {
@@ -689,8 +690,8 @@
       </div>
 
       <div class="language-switch" aria-label="Language switch">
-        <button type="button" data-lang-button="tr" class="active">TR</button>
-        <button type="button" data-lang-button="en">EN</button>
+        <button type="button" data-lang-button="tr" class="active" onclick="setLanguage('tr')">TR</button>
+        <button type="button" data-lang-button="en" onclick="setLanguage('en')">EN</button>
       </div>
 
       <nav class="top-links" aria-label="Site links" id="topLinks"></nav>
@@ -751,6 +752,15 @@ sessizce</div>
   </div>
 
   <script>
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on("init", (user) => {
+        const hash = window.location.hash || "";
+        if (!user && (hash.includes("invite_token") || hash.includes("confirmation_token") || hash.includes("recovery_token"))) {
+          window.netlifyIdentity.open();
+        }
+      });
+    }
+
     const defaultSiteData = {
       site: {
         brand_name: "Muratomo Haiku",
@@ -807,7 +817,7 @@ quietly" },
 
     let siteData = defaultSiteData;
     let postsData = defaultPostsData;
-    let currentLang = "tr";
+    let currentLang = localStorage.getItem("muratomo-language") || "tr";
     let currentFilter = "all";
 
     const qs = (selector) => document.querySelector(selector);
@@ -1025,12 +1035,13 @@ Haiku").replace(/
       if (detailView.classList.contains("active")) showHome();
     }
 
-    document.querySelectorAll("[data-lang-button]").forEach((button) => {
-      button.addEventListener("click", () => {
-        currentLang = button.dataset.langButton;
-        render();
-      });
-    });
+    function setLanguage(lang) {
+      currentLang = lang;
+      localStorage.setItem("muratomo-language", lang);
+      render();
+    }
+
+    window.setLanguage = setLanguage;
 
     qs("#closeModal").addEventListener("click", closeModal);
     modalBackdrop.addEventListener("click", (event) => { if (event.target === modalBackdrop) closeModal(); });
