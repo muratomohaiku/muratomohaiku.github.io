@@ -1,0 +1,312 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "assets/uploads"
+public_folder: "/assets/uploads"
+
+publish_mode: simple
+locale: "tr"
+
+collections:
+  - name: "site"
+    label: "Site Ayarları"
+    files:
+      - name: "settings"
+        label: "Metinler, Menüler ve Sayfalar"
+        file: "content/site.json"
+        format: "json"
+        fields:
+          - label: "Site"
+            name: "site"
+            widget: "object"
+            fields:
+              - { label: "Marka Adı", name: "brand_name", widget: "string" }
+              - label: "Alt Başlık"
+                name: "brand_sub"
+                widget: "object"
+                fields:
+                  - { label: "TR", name: "tr", widget: "string" }
+                  - { label: "EN", name: "en", widget: "string" }
+
+              - label: "Hero Kicker"
+                name: "hero_kicker"
+                widget: "object"
+                fields:
+                  - { label: "TR", name: "tr", widget: "string" }
+                  - { label: "EN", name: "en", widget: "string" }
+
+              - label: "Hero Açıklama"
+                name: "hero_copy"
+                widget: "object"
+                fields:
+                  - { label: "TR", name: "tr", widget: "text" }
+                  - { label: "EN", name: "en", widget: "text" }
+
+              - { label: "Sağ Kart Başlığı", name: "featured_title", widget: "text" }
+
+              - label: "Sağ Kart Notu"
+                name: "featured_note"
+                widget: "object"
+                fields:
+                  - { label: "TR", name: "tr", widget: "text" }
+                  - { label: "EN", name: "en", widget: "text" }
+
+              - label: "Filtre Başlığı"
+                name: "filter_title"
+                widget: "object"
+                fields:
+                  - { label: "TR", name: "tr", widget: "string" }
+                  - { label: "EN", name: "en", widget: "string" }
+
+              - label: "Sol Not"
+                name: "side_note"
+                widget: "object"
+                fields:
+                  - { label: "TR", name: "tr", widget: "text" }
+                  - { label: "EN", name: "en", widget: "text" }
+
+              - label: "Akış Başlığı"
+                name: "stream_title"
+                widget: "object"
+                fields:
+                  - { label: "TR", name: "tr", widget: "string" }
+                  - { label: "EN", name: "en", widget: "string" }
+
+              - label: "Boş Akış Mesajı"
+                name: "empty_state"
+                widget: "object"
+                fields:
+                  - { label: "TR", name: "tr", widget: "text" }
+                  - { label: "EN", name: "en", widget: "text" }
+
+              - label: "Read More"
+                name: "read_more"
+                widget: "object"
+                fields:
+                  - { label: "TR", name: "tr", widget: "string" }
+                  - { label: "EN", name: "en", widget: "string" }
+
+              - label: "Back"
+                name: "back"
+                widget: "object"
+                fields:
+                  - { label: "TR", name: "tr", widget: "string" }
+                  - { label: "EN", name: "en", widget: "string" }
+
+              - label: "Entry Count Label"
+                name: "entries"
+                widget: "object"
+                fields:
+                  - { label: "TR", name: "tr", widget: "string" }
+                  - { label: "EN", name: "en", widget: "string" }
+
+              - label: "Footer"
+                name: "footer_line"
+                widget: "object"
+                fields:
+                  - { label: "TR", name: "tr", widget: "string" }
+                  - { label: "EN", name: "en", widget: "string" }
+
+          - label: "Üst Menü"
+            name: "nav"
+            widget: "object"
+            fields:
+              - label: "Info / Bilgi"
+                name: "info"
+                widget: "object"
+                fields:
+                  - { label: "TR", name: "tr", widget: "string" }
+                  - { label: "EN", name: "en", widget: "string" }
+              - label: "About / Hakkında"
+                name: "about"
+                widget: "object"
+                fields:
+                  - { label: "TR", name: "tr", widget: "string" }
+                  - { label: "EN", name: "en", widget: "string" }
+              - label: "Privacy / Gizlilik"
+                name: "privacy"
+                widget: "object"
+                fields:
+                  - { label: "TR", name: "tr", widget: "string" }
+                  - { label: "EN", name: "en", widget: "string" }
+              - label: "Contact / İletişim"
+                name: "contact"
+                widget: "object"
+                fields:
+                  - { label: "TR", name: "tr", widget: "string" }
+                  - { label: "EN", name: "en", widget: "string" }
+
+          - label: "Detay Sayfası Başlıkları"
+            name: "section_labels"
+            widget: "object"
+            fields:
+              - label: "Technique / Teknik"
+                name: "technique"
+                widget: "object"
+                fields:
+                  - { label: "TR", name: "tr", widget: "string" }
+                  - { label: "EN", name: "en", widget: "string" }
+              - label: "Reflection / Yansıma"
+                name: "reflection"
+                widget: "object"
+                fields:
+                  - { label: "TR", name: "tr", widget: "string" }
+                  - { label: "EN", name: "en", widget: "string" }
+              - label: "Haiku"
+                name: "haiku"
+                widget: "object"
+                fields:
+                  - { label: "TR", name: "tr", widget: "string" }
+                  - { label: "EN", name: "en", widget: "string" }
+              - label: "Gallery / Galeri"
+                name: "gallery"
+                widget: "object"
+                fields:
+                  - { label: "TR", name: "tr", widget: "string" }
+                  - { label: "EN", name: "en", widget: "string" }
+
+          - label: "Filtreler"
+            name: "filters"
+            widget: "list"
+            summary: "{{fields.id}} — {{fields.tr}} / {{fields.en}}"
+            fields:
+              - { label: "ID", name: "id", widget: "string", hint: "Örn: martial, life, objects. Post etiketleri bu ID ile eşleşmeli." }
+              - { label: "TR", name: "tr", widget: "string" }
+              - { label: "EN", name: "en", widget: "string" }
+
+          - label: "Sayfalar"
+            name: "pages"
+            widget: "object"
+            fields:
+              - label: "Info / Bilgi"
+                name: "info"
+                widget: "object"
+                fields:
+                  - label: "Başlık"
+                    name: "title"
+                    widget: "object"
+                    fields:
+                      - { label: "TR", name: "tr", widget: "string" }
+                      - { label: "EN", name: "en", widget: "string" }
+                  - label: "Metin"
+                    name: "body"
+                    widget: "object"
+                    fields:
+                      - { label: "TR", name: "tr", widget: "markdown" }
+                      - { label: "EN", name: "en", widget: "markdown" }
+
+              - label: "About / Hakkında"
+                name: "about"
+                widget: "object"
+                fields:
+                  - label: "Başlık"
+                    name: "title"
+                    widget: "object"
+                    fields:
+                      - { label: "TR", name: "tr", widget: "string" }
+                      - { label: "EN", name: "en", widget: "string" }
+                  - label: "Metin"
+                    name: "body"
+                    widget: "object"
+                    fields:
+                      - { label: "TR", name: "tr", widget: "markdown" }
+                      - { label: "EN", name: "en", widget: "markdown" }
+
+              - label: "Privacy / Gizlilik"
+                name: "privacy"
+                widget: "object"
+                fields:
+                  - label: "Başlık"
+                    name: "title"
+                    widget: "object"
+                    fields:
+                      - { label: "TR", name: "tr", widget: "string" }
+                      - { label: "EN", name: "en", widget: "string" }
+                  - label: "Metin"
+                    name: "body"
+                    widget: "object"
+                    fields:
+                      - { label: "TR", name: "tr", widget: "markdown" }
+                      - { label: "EN", name: "en", widget: "markdown" }
+
+              - label: "Contact / İletişim"
+                name: "contact"
+                widget: "object"
+                fields:
+                  - label: "Başlık"
+                    name: "title"
+                    widget: "object"
+                    fields:
+                      - { label: "TR", name: "tr", widget: "string" }
+                      - { label: "EN", name: "en", widget: "string" }
+                  - label: "Metin"
+                    name: "body"
+                    widget: "object"
+                    fields:
+                      - { label: "TR", name: "tr", widget: "markdown" }
+                      - { label: "EN", name: "en", widget: "markdown" }
+
+  - name: "posts"
+    label: "Gönderiler"
+    files:
+      - name: "post_list"
+        label: "Gönderi Listesi"
+        file: "content/posts.json"
+        format: "json"
+        fields:
+          - label: "Gönderiler"
+            name: "posts"
+            widget: "list"
+            summary: "{{fields.date}} — {{fields.title.tr}}"
+            fields:
+              - { label: "Yayında", name: "visible", widget: "boolean", default: true }
+              - { label: "ID / Slug", name: "id", widget: "string", hint: "Örn: atemi-zone. Küçük harf, tire kullan." }
+              - { label: "Tarih", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
+              - { label: "Kapak Görseli", name: "cover_image", widget: "image", required: false }
+              - label: "Galeri Görselleri"
+                name: "gallery_images"
+                widget: "list"
+                required: false
+                field: { label: "Görsel", name: "image", widget: "image" }
+
+              - label: "Etiketler"
+                name: "tags"
+                widget: "list"
+                hint: "Filtre ID'leriyle aynı olmalı. Örn: martial, life, sketch, haiku"
+                field: { label: "Etiket", name: "tag", widget: "string" }
+
+              - label: "Başlık"
+                name: "title"
+                widget: "object"
+                fields:
+                  - { label: "TR", name: "tr", widget: "string" }
+                  - { label: "EN", name: "en", widget: "string" }
+
+              - label: "Kısa Özet"
+                name: "summary"
+                widget: "object"
+                fields:
+                  - { label: "TR", name: "tr", widget: "text" }
+                  - { label: "EN", name: "en", widget: "text" }
+
+              - label: "Teknik"
+                name: "technique"
+                widget: "object"
+                fields:
+                  - { label: "TR", name: "tr", widget: "text", required: false }
+                  - { label: "EN", name: "en", widget: "text", required: false }
+
+              - label: "Yansıma"
+                name: "reflection"
+                widget: "object"
+                fields:
+                  - { label: "TR", name: "tr", widget: "text", required: false }
+                  - { label: "EN", name: "en", widget: "text", required: false }
+
+              - label: "Haiku"
+                name: "haiku"
+                widget: "object"
+                fields:
+                  - { label: "TR", name: "tr", widget: "text", required: false }
+                  - { label: "EN", name: "en", widget: "text", required: false }
