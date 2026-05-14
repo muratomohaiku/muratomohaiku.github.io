@@ -895,9 +895,11 @@ sessizce</div>
       qs("#heroCopy").textContent = t(site.hero_copy);
       const lineBreak = String.fromCharCode(10);
       const carriageReturn = String.fromCharCode(13);
-      qs("#featuredTitle").innerHTML = String(site.featured_title || "Muratomo Haiku")
-        .split(carriageReturn).join("")
-        .split(lineBreak).join("<br>");
+     const lineBreak = String.fromCharCode(10);
+const carriageReturn = String.fromCharCode(13);
+qs("#featuredTitle").innerHTML = String(site.featured_title || "Muratomo Haiku")
+  .split(carriageReturn).join("")
+  .split(lineBreak).join("<br>");
       qs("#featuredNote").textContent = t(site.featured_note);
       qs("#filterTitle").textContent = t(site.filter_title);
       qs("#sideNote").textContent = t(site.side_note);
