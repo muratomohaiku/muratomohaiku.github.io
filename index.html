@@ -893,9 +893,11 @@ sessizce</div>
       qs("#heroKicker").textContent = t(site.hero_kicker);
       qs("#heroTitle").innerHTML = (site.brand_name || "Muratomo Haiku").replace(" ", "<br>");
       qs("#heroCopy").textContent = t(site.hero_copy);
-      qs("#featuredTitle").innerHTML = String(site.featured_title || "Muratomo Haiku").replace(/
-?
-/g, "<br>");
+      const lineBreak = String.fromCharCode(10);
+      const carriageReturn = String.fromCharCode(13);
+      qs("#featuredTitle").innerHTML = String(site.featured_title || "Muratomo Haiku")
+        .split(carriageReturn).join("")
+        .split(lineBreak).join("<br>");
       qs("#featuredNote").textContent = t(site.featured_note);
       qs("#filterTitle").textContent = t(site.filter_title);
       qs("#sideNote").textContent = t(site.side_note);
