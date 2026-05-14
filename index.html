@@ -774,10 +774,10 @@
 <body>
   <div class="site-shell" id="app">
     <header class="topbar">
-      <a href="#" class="brand" id="homeLink" aria-label="Muratomo Haiku home">
+      <div class="brand" aria-label="Muratomo Haiku">
         <span class="brand-main">Muratomo Haiku</span>
         <span class="brand-sub" data-i18n="brandSub">çizimler · notlar · küçük yansımalar</span>
-      </a>
+      </div>
 
       <div class="language-switch" aria-label="Language switch">
         <button type="button" data-lang-button="tr" class="active">TR</button>
@@ -953,8 +953,12 @@
           en: "What interested me here was not the strike itself, but the space before it. Sometimes a line behaves like movement; it marks the field before intention becomes visible."
         },
         haiku: {
-          tr: "kırmızı halka\nel durmadan önce\nmesafe konuşur",
-          en: "red circle\nbefore the hand moves\ndistance speaks"
+          tr: "kırmızı halka
+el durmadan önce
+mesafe konuşur",
+          en: "red circle
+before the hand moves
+distance speaks"
         }
       },
       {
@@ -976,8 +980,12 @@
           en: "Even when a page feels full, some spaces remain. Maybe those are the places where the drawing breathes."
         },
         haiku: {
-          tr: "gri bir sabah\nkırmızı çiçek açar\nyol kenarında",
-          en: "grey morning\nred blossoms appear\nbeside the road"
+          tr: "gri bir sabah
+kırmızı çiçek açar
+yol kenarında",
+          en: "grey morning
+red blossoms appear
+beside the road"
         }
       },
       {
@@ -999,8 +1007,12 @@
           en: "Some works feel more like objects than images. This bookmark feels like a small night kept inside a notebook."
         },
         haiku: {
-          tr: "ince kâğıtta\nbir baykuş bekliyor\nsayfa kararır",
-          en: "on thin paper\nan owl waits quietly\nthe page grows dark"
+          tr: "ince kâğıtta
+bir baykuş bekliyor
+sayfa kararır",
+          en: "on thin paper
+an owl waits quietly
+the page grows dark"
         }
       },
       {
@@ -1022,8 +1034,12 @@
           en: "Objects sometimes feel less like made things and more like found sentences. They wait quietly on the desk."
         },
         haiku: {
-          tr: "küçük bir taş\npirinç gövdenin yanında\nzaman ağırdır",
-          en: "a small stone\nbeside a brass body\ntime feels heavy"
+          tr: "küçük bir taş
+pirinç gövdenin yanında
+zaman ağırdır",
+          en: "a small stone
+beside a brass body
+time feels heavy"
         }
       },
       {
@@ -1045,8 +1061,12 @@
           en: "Technical things can also be poetic, especially when cables, numbers, and hands appear together."
         },
         haiku: {
-          tr: "küçük ekranda\nbir sayı yanıp söner\nel not alırken",
-          en: "on a small screen\na number flickers softly\nwhile the hand writes"
+          tr: "küçük ekranda
+bir sayı yanıp söner
+el not alırken",
+          en: "on a small screen
+a number flickers softly
+while the hand writes"
         }
       }
     ];
@@ -1258,10 +1278,6 @@
       if (event.target === modalBackdrop) closeModal();
     });
 
-    document.querySelector("#homeLink").addEventListener("click", (event) => {
-      event.preventDefault();
-      showHome();
-    });
 
     render();
   </script>
