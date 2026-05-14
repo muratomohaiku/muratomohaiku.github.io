@@ -1,0 +1,174 @@
+{
+  "site": {
+    "brand_name": "Muratomo Haiku",
+    "brand_sub": {
+      "tr": "çizimler · notlar · küçük yansımalar",
+      "en": "drawings · notes · small reflections"
+    },
+    "hero_kicker": {
+      "tr": "analog arşiv / dijital oda",
+      "en": "analog archive / digital room"
+    },
+    "hero_copy": {
+      "tr": "Masa üstünde kalan çizimler, dövüş notları, objeler, teknik denemeler ve hayatın küçük yankıları.",
+      "en": "Drawings left on the desk, martial notes, objects, technique studies, and small echoes from life."
+    },
+    "featured_title": "Muratomo\nHaiku",
+    "featured_note": {
+      "tr": "boş bir sayfa\nyeni izleri bekler\nsessizce",
+      "en": "an empty page\nwaits for new traces\nquietly"
+    },
+    "filter_title": {
+      "tr": "Kılavuz kelimeler",
+      "en": "Guide words"
+    },
+    "side_note": {
+      "tr": "Kategoriler değil; izler. Bir kelimeye dokununca akış sadece o ruh halindeki işleri gösterir.",
+      "en": "Not categories; traces. Touching a word narrows the stream to that mood, material, or question."
+    },
+    "stream_title": {
+      "tr": "Akış",
+      "en": "Stream"
+    },
+    "empty_state": {
+      "tr": "Henüz bir iz yok. /admin alanından ilk gönderiyi ekle.",
+      "en": "No traces yet. Add the first entry from /admin."
+    },
+    "read_more": {
+      "tr": "içine gir",
+      "en": "enter"
+    },
+    "back": {
+      "tr": "akışa dön",
+      "en": "back to stream"
+    },
+    "entries": {
+      "tr": "iz",
+      "en": "entries"
+    },
+    "footer_line": {
+      "tr": "çizimler, notlar ve küçük yansımalar",
+      "en": "drawings, notes, and small reflections"
+    }
+  },
+  "nav": {
+    "info": {
+      "tr": "Bilgi",
+      "en": "Info"
+    },
+    "about": {
+      "tr": "Hakkında",
+      "en": "About"
+    },
+    "privacy": {
+      "tr": "Gizlilik",
+      "en": "Privacy Policy"
+    },
+    "contact": {
+      "tr": "İletişim",
+      "en": "Contact"
+    }
+  },
+  "section_labels": {
+    "technique": {
+      "tr": "Teknik",
+      "en": "Technique"
+    },
+    "reflection": {
+      "tr": "Yansıma",
+      "en": "Reflection"
+    },
+    "haiku": {
+      "tr": "Haiku",
+      "en": "Haiku"
+    },
+    "gallery": {
+      "tr": "Yakın izler",
+      "en": "Close traces"
+    }
+  },
+  "filters": [
+    {
+      "id": "all",
+      "tr": "Hepsi",
+      "en": "All"
+    },
+    {
+      "id": "martial",
+      "tr": "Dövüş Sanatları",
+      "en": "Martial Arts"
+    },
+    {
+      "id": "life",
+      "tr": "Hayat",
+      "en": "Life"
+    },
+    {
+      "id": "emotions",
+      "tr": "Duygular",
+      "en": "Emotions"
+    },
+    {
+      "id": "objects",
+      "tr": "Objeler",
+      "en": "Objects"
+    },
+    {
+      "id": "sketch",
+      "tr": "Eskiz",
+      "en": "Sketch"
+    },
+    {
+      "id": "technique",
+      "tr": "Teknik",
+      "en": "Technique"
+    },
+    {
+      "id": "haiku",
+      "tr": "Haiku",
+      "en": "Haiku"
+    }
+  ],
+  "pages": {
+    "info": {
+      "title": {
+        "tr": "Bilgi",
+        "en": "Info"
+      },
+      "body": {
+        "tr": "<p>Muratomo Haiku, kategori mantığından çok iz mantığıyla çalışan kişisel bir akış.</p>",
+        "en": "<p>Muratomo Haiku is a personal stream organized by traces rather than strict categories.</p>"
+      }
+    },
+    "about": {
+      "title": {
+        "tr": "Hakkında",
+        "en": "About"
+      },
+      "body": {
+        "tr": "<p>Muratomo Haiku, Murat'ın çizim, not, obje ve kısa iç yansımaları için sessiz bir dijital oda.</p>",
+        "en": "<p>Muratomo Haiku is a quiet digital room for Murat's drawings, notes, objects, and short inner reflections.</p>"
+      }
+    },
+    "privacy": {
+      "title": {
+        "tr": "Gizlilik",
+        "en": "Privacy Policy"
+      },
+      "body": {
+        "tr": "<p>Bu site ilk halinde takip çerezi, üyelik sistemi veya reklam ağı kullanmaz.</p>",
+        "en": "<p>This site does not use tracking cookies, member accounts, or ad networks in its first version.</p>"
+      }
+    },
+    "contact": {
+      "title": {
+        "tr": "İletişim",
+        "en": "Contact"
+      },
+      "body": {
+        "tr": "<p>İletişim bilgileri buraya eklenecek.</p>",
+        "en": "<p>Contact details will be added here.</p>"
+      }
+    }
+  }
+}
