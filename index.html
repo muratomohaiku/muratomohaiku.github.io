@@ -767,13 +767,8 @@ sessizce</div>
         brand_sub: { tr: "çizimler · notlar · küçük yansımalar", en: "drawings · notes · small reflections" },
         hero_kicker: { tr: "analog arşiv / dijital oda", en: "analog archive / digital room" },
         hero_copy: { tr: "Masa üstünde kalan çizimler, dövüş notları, objeler, teknik denemeler ve hayatın küçük yankıları.", en: "Drawings left on the desk, martial notes, objects, technique studies, and small echoes from life." },
-        featured_title: "Muratomo
-Haiku",
-        featured_note: { tr: "boş bir sayfa
-yeni izleri bekler
-sessizce", en: "an empty page
-waits for new traces
-quietly" },
+        featured_title: "Muratomo Haiku",
+        featured_note: { tr: "boş bir sayfa / yeni izleri bekler / sessizce", en: "an empty page / waits for new traces / quietly" },
         filter_title: { tr: "Kılavuz kelimeler", en: "Guide words" },
         side_note: { tr: "Kategoriler değil; izler. Bir kelimeye dokununca akış sadece o ruh halindeki işleri gösterir.", en: "Not categories; traces. Touching a word narrows the stream to that mood, material, or question." },
         stream_title: { tr: "Akış", en: "Stream" },
@@ -898,8 +893,8 @@ quietly" },
       qs("#heroKicker").textContent = t(site.hero_kicker);
       qs("#heroTitle").innerHTML = (site.brand_name || "Muratomo Haiku").replace(" ", "<br>");
       qs("#heroCopy").textContent = t(site.hero_copy);
-      qs("#featuredTitle").innerHTML = String(site.featured_title || "Muratomo
-Haiku").replace(/
+      qs("#featuredTitle").innerHTML = String(site.featured_title || "Muratomo Haiku").replace(/
+?
 /g, "<br>");
       qs("#featuredNote").textContent = t(site.featured_note);
       qs("#filterTitle").textContent = t(site.filter_title);
@@ -1036,8 +1031,9 @@ Haiku").replace(/
     }
 
     function setLanguage(lang) {
-      currentLang = lang;
-      localStorage.setItem("muratomo-language", lang);
+      const normalizedLang = String(lang).toLowerCase().startsWith("en") ? "en" : "tr";
+      currentLang = normalizedLang;
+      localStorage.setItem("muratomo-language", normalizedLang);
       render();
     }
 
