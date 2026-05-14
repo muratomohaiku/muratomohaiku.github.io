@@ -1,35 +1,42 @@
 <!doctype html>
-<html lang="tr">
+<html lang="tr" data-lang="tr">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Muratomo Haiku</title>
-  <meta name="description" content="Drawings, notes, and small reflections by Muratomo." />
+  <meta name="description" content="Drawings, notes, martial traces, objects and small reflections." />
   <style>
     :root {
-      --paper: #f4efe6;
-      --ink: #171412;
-      --muted: #756b60;
-      --line: rgba(23, 20, 18, 0.14);
-      --mist: rgba(255, 255, 255, 0.44);
-      --shadow: 0 24px 70px rgba(35, 27, 19, 0.16);
+      --paper: #f3eadc;
+      --paper-2: #e7dac7;
+      --ink: #17130f;
+      --muted: #74695d;
+      --faint: rgba(23, 19, 15, 0.13);
+      --soft: rgba(255, 252, 245, 0.56);
+      --soft-strong: rgba(255, 252, 245, 0.82);
+      --red: #a83a2d;
+      --brass: #a98245;
+      --grey: #a7a39b;
+      --shadow: 0 24px 70px rgba(41, 31, 20, 0.15);
+      --radius-lg: 34px;
+      --radius-md: 22px;
+      --max: 1180px;
     }
 
     * { box-sizing: border-box; }
 
-    html {
-      scroll-behavior: smooth;
-    }
+    html { scroll-behavior: smooth; }
 
     body {
       margin: 0;
       min-height: 100vh;
-      background:
-        radial-gradient(circle at 20% 15%, rgba(255,255,255,.7), transparent 30%),
-        radial-gradient(circle at 78% 35%, rgba(195, 172, 134, .25), transparent 32%),
-        linear-gradient(135deg, #f6f0e6 0%, #ece2d4 58%, #dfd0bc 100%);
       color: var(--ink);
-      font-family: ui-serif, Georgia, Cambria, "Times New Roman", serif;
+      background:
+        radial-gradient(circle at 22% 8%, rgba(255,255,255,.74), transparent 34%),
+        radial-gradient(circle at 88% 16%, rgba(168,58,45,.08), transparent 29%),
+        radial-gradient(circle at 18% 80%, rgba(169,130,69,.18), transparent 35%),
+        linear-gradient(135deg, var(--paper) 0%, #eee3d3 48%, var(--paper-2) 100%);
+      font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Helvetica, Arial, sans-serif;
       overflow-x: hidden;
     }
 
@@ -38,402 +45,1225 @@
       position: fixed;
       inset: 0;
       pointer-events: none;
-      opacity: .22;
+      opacity: .18;
       background-image:
-        linear-gradient(var(--line) 1px, transparent 1px),
-        linear-gradient(90deg, var(--line) 1px, transparent 1px);
-      background-size: 42px 42px;
-      mask-image: radial-gradient(circle at 50% 35%, #000, transparent 72%);
+        linear-gradient(var(--faint) 1px, transparent 1px),
+        linear-gradient(90deg, var(--faint) 1px, transparent 1px);
+      background-size: 38px 38px;
+      mask-image: radial-gradient(circle at 52% 30%, #000, transparent 76%);
     }
 
-    .grain {
+    body::after {
+      content: "";
       position: fixed;
       inset: 0;
       pointer-events: none;
-      opacity: .12;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 220 220' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+      opacity: .11;
       mix-blend-mode: multiply;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 220 220' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.73' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E");
     }
 
-    header {
-      position: fixed;
-      z-index: 10;
-      top: 0;
-      left: 0;
-      right: 0;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 22px clamp(20px, 4vw, 56px);
-      backdrop-filter: blur(12px);
-      background: linear-gradient(to bottom, rgba(244,239,230,.72), rgba(244,239,230,0));
+    a { color: inherit; }
+
+    button, input, textarea {
+      font: inherit;
     }
 
-    .mark {
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      font-size: 13px;
+    .serif {
+      font-family: ui-serif, Georgia, Cambria, "Times New Roman", serif;
     }
 
-    .soft-link {
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      padding: 9px 13px;
-      color: var(--ink);
-      text-decoration: none;
-      font-size: 13px;
-      background: rgba(255,255,255,.22);
-    }
-
-    main {
+    .site-shell {
       position: relative;
       z-index: 1;
+      min-height: 100vh;
     }
 
-    .hero {
-      min-height: 100svh;
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
       display: grid;
-      place-items: center;
-      padding: 120px 20px 80px;
-      text-align: center;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 18px;
+      padding: 18px clamp(16px, 4vw, 46px);
+      background: linear-gradient(to bottom, rgba(243,234,220,.92), rgba(243,234,220,.68) 70%, rgba(243,234,220,0));
+      backdrop-filter: blur(14px);
     }
 
-    .hero-inner {
-      max-width: 820px;
+    .brand {
+      display: inline-flex;
+      flex-direction: column;
+      width: max-content;
+      text-decoration: none;
+      line-height: 1;
     }
 
-    .kicker {
+    .brand-main {
+      font-family: ui-serif, Georgia, Cambria, "Times New Roman", serif;
+      font-size: 25px;
+      letter-spacing: -.045em;
+    }
+
+    .brand-sub {
+      margin-top: 5px;
       color: var(--muted);
-      font-size: clamp(14px, 1.6vw, 18px);
+      font-size: 10px;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+    }
+
+    .language-switch {
+      justify-self: center;
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      padding: 4px;
+      border: 1px solid var(--faint);
+      border-radius: 999px;
+      background: rgba(255,255,255,.28);
+    }
+
+    .language-switch button,
+    .top-links button,
+    .filter-button {
+      border: 0;
+      cursor: pointer;
+      color: var(--ink);
+      background: transparent;
+    }
+
+    .language-switch button {
+      border-radius: 999px;
+      padding: 7px 10px;
+      color: var(--muted);
+      font-size: 12px;
+      letter-spacing: .08em;
+    }
+
+    .language-switch button.active {
+      color: var(--paper);
+      background: var(--ink);
+    }
+
+    .top-links {
+      justify-self: end;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      color: var(--muted);
+      font-size: 12px;
       letter-spacing: .08em;
       text-transform: uppercase;
-      margin-bottom: 18px;
+    }
+
+    .top-links button:hover { color: var(--ink); }
+
+    .hero {
+      max-width: var(--max);
+      margin: 0 auto;
+      min-height: 76vh;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(280px, 430px);
+      align-items: end;
+      gap: clamp(28px, 8vw, 90px);
+      padding: 72px clamp(18px, 4vw, 46px) 96px;
+    }
+
+    .hero-kicker {
+      display: inline-block;
+      margin-bottom: 24px;
+      padding: 8px 12px;
+      border: 1px solid var(--faint);
+      border-radius: 999px;
+      color: var(--muted);
+      background: rgba(255,255,255,.2);
+      font-size: 12px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
     }
 
     h1 {
       margin: 0;
-      font-size: clamp(56px, 12vw, 144px);
-      line-height: .9;
+      max-width: 760px;
+      font-family: ui-serif, Georgia, Cambria, "Times New Roman", serif;
+      font-size: clamp(70px, 12vw, 166px);
       font-weight: 400;
-      letter-spacing: -.08em;
+      line-height: .82;
+      letter-spacing: -.09em;
     }
 
-    .subtitle {
-      max-width: 560px;
-      margin: 26px auto 0;
+    .hero-copy {
+      max-width: 660px;
+      margin: 30px 0 0;
       color: var(--muted);
-      font-size: clamp(18px, 2.2vw, 24px);
-      line-height: 1.5;
+      font-family: ui-serif, Georgia, Cambria, "Times New Roman", serif;
+      font-size: clamp(20px, 2.4vw, 31px);
+      line-height: 1.28;
     }
 
-    .enter {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      margin-top: 42px;
-      border: 0;
-      background: var(--ink);
-      color: var(--paper);
-      border-radius: 999px;
-      padding: 14px 19px;
-      cursor: pointer;
-      font: inherit;
+    .hero-card {
+      justify-self: stretch;
+      padding: 18px;
+      border: 1px solid var(--faint);
+      border-radius: var(--radius-lg);
+      background: var(--soft);
       box-shadow: var(--shadow);
+      transform: rotate(1.5deg);
     }
 
-    .enter span {
-      display: inline-block;
-      transform: translateY(-1px);
-    }
-
-    .room {
-      min-height: 150vh;
-      padding: 80px clamp(18px, 4vw, 58px) 140px;
-    }
-
-    .room-intro {
-      max-width: 620px;
-      margin: 0 auto 70px;
-      text-align: center;
-      color: var(--muted);
-      font-size: 19px;
-      line-height: 1.7;
-    }
-
-    .constellation {
-      position: relative;
-      max-width: 1120px;
-      min-height: 840px;
-      margin: 0 auto;
-      border-radius: 48px;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,.18);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,.42), var(--shadow);
+    .hero-card-inner {
+      min-height: 370px;
+      display: grid;
+      align-content: space-between;
+      padding: 26px;
+      border-radius: 24px;
+      background:
+        radial-gradient(circle at 42% 36%, transparent 0 88px, rgba(168,58,45,.86) 89px 98px, transparent 99px),
+        radial-gradient(circle at 50% 83%, rgba(169,130,69,.54), transparent 54px),
+        linear-gradient(160deg, rgba(255,255,255,.84), rgba(235,226,214,.66));
       overflow: hidden;
     }
 
-    .constellation::before {
-      content: "";
-      position: absolute;
-      inset: 34px;
-      border: 1px dashed rgba(23, 20, 18, .13);
-      border-radius: 36px;
-      pointer-events: none;
+    .hero-card-title {
+      font-family: ui-serif, Georgia, Cambria, "Times New Roman", serif;
+      font-size: 38px;
+      line-height: .95;
+      letter-spacing: -.06em;
     }
 
-    .piece {
-      position: absolute;
-      width: min(310px, 74vw);
-      border: 1px solid var(--line);
-      border-radius: 28px;
-      padding: 14px;
-      background: rgba(252, 249, 243, .72);
-      backdrop-filter: blur(18px);
-      box-shadow: 0 22px 48px rgba(45, 34, 22, .13);
-      transform: translate3d(0,0,0) rotate(var(--tilt));
-      transition: transform .45s ease, box-shadow .45s ease, background .45s ease;
-    }
-
-    .piece:hover {
-      transform: translateY(-9px) rotate(0deg) scale(1.02);
-      background: rgba(255,255,255,.86);
-      box-shadow: 0 30px 70px rgba(45, 34, 22, .18);
-    }
-
-    .piece img {
-      width: 100%;
-      aspect-ratio: 4 / 3;
-      display: block;
-      object-fit: cover;
-      border-radius: 20px;
-      filter: saturate(.88) contrast(.96);
-      background: #ddd0bf;
-    }
-
-    .piece h2 {
-      margin: 15px 4px 5px;
-      font-weight: 400;
-      font-size: 25px;
-      letter-spacing: -.03em;
-    }
-
-    .piece p {
-      margin: 0 4px 13px;
+    .hero-card-note {
+      max-width: 260px;
       color: var(--muted);
-      line-height: 1.5;
+      font-family: ui-serif, Georgia, Cambria, "Times New Roman", serif;
+      font-size: 20px;
+      line-height: 1.35;
+    }
+
+    .layout {
+      max-width: var(--max);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 210px minmax(0, 1fr);
+      gap: clamp(24px, 6vw, 72px);
+      padding: 0 clamp(18px, 4vw, 46px) 110px;
+    }
+
+    .side-panel {
+      position: sticky;
+      top: 106px;
+      height: max-content;
+      padding-bottom: 24px;
+    }
+
+    .side-title {
+      margin-bottom: 16px;
+      color: var(--muted);
+      font-size: 11px;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+    }
+
+    .filter-list {
+      display: grid;
+      gap: 7px;
+    }
+
+    .filter-button {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(23,19,15,.09);
+      text-align: left;
+      color: var(--muted);
       font-size: 15px;
     }
 
-    .meta {
+    .filter-button:hover,
+    .filter-button.active {
+      color: var(--ink);
+    }
+
+    .filter-button.active .dot {
+      background: var(--red);
+      box-shadow: 0 0 0 6px rgba(168,58,45,.08);
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(23,19,15,.22);
+      flex: 0 0 auto;
+    }
+
+    .mini-note {
+      margin-top: 32px;
+      padding: 16px;
+      border: 1px solid var(--faint);
+      border-radius: 18px;
+      background: rgba(255,255,255,.19);
+      color: var(--muted);
+      font-family: ui-serif, Georgia, Cambria, "Times New Roman", serif;
+      font-size: 15px;
+      line-height: 1.45;
+    }
+
+    .stream-head {
       display: flex;
       justify-content: space-between;
-      gap: 12px;
-      color: var(--muted);
-      border-top: 1px solid var(--line);
-      padding: 11px 4px 2px;
-      font-size: 12px;
-      letter-spacing: .04em;
-      text-transform: uppercase;
+      align-items: end;
+      gap: 20px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--faint);
     }
 
-    .p1 { left: 7%; top: 8%; --tilt: -3deg; }
-    .p2 { right: 9%; top: 18%; --tilt: 3deg; }
-    .p3 { left: 34%; top: 43%; --tilt: -1.5deg; }
-    .p4 { left: 10%; bottom: 7%; --tilt: 2.5deg; }
-    .p5 { right: 7%; bottom: 11%; --tilt: -2deg; }
-
-    .haiku-note {
-      position: absolute;
-      width: 230px;
-      left: 41%;
-      top: 19%;
-      padding: 24px;
-      border-radius: 50% 46% 52% 42%;
-      border: 1px solid var(--line);
-      background: rgba(23, 20, 18, .86);
-      color: var(--paper);
-      line-height: 1.55;
-      box-shadow: var(--shadow);
-      transform: rotate(-4deg);
+    .stream-title {
+      margin: 0;
+      font-family: ui-serif, Georgia, Cambria, "Times New Roman", serif;
+      font-size: clamp(36px, 5vw, 68px);
+      font-weight: 400;
+      letter-spacing: -.06em;
     }
 
-    .archive {
-      padding: 100px clamp(18px, 4vw, 58px) 150px;
-    }
-
-    .archive-box {
-      max-width: 900px;
-      margin: 0 auto;
-      border-top: 1px solid var(--line);
-    }
-
-    .archive-row {
-      display: grid;
-      grid-template-columns: 130px 1fr auto;
-      gap: 18px;
-      align-items: baseline;
-      padding: 22px 0;
-      border-bottom: 1px solid var(--line);
-      color: var(--ink);
-      text-decoration: none;
-    }
-
-    .archive-row:hover .row-title {
-      letter-spacing: .02em;
-    }
-
-    .row-date, .row-type {
+    .stream-count {
       color: var(--muted);
       font-size: 13px;
+      letter-spacing: .08em;
       text-transform: uppercase;
-      letter-spacing: .05em;
+      white-space: nowrap;
     }
 
-    .row-title {
-      font-size: clamp(22px, 3vw, 34px);
-      transition: letter-spacing .3s ease;
+    .posts {
+      display: grid;
+      gap: 42px;
+      margin-top: 40px;
     }
 
-    footer {
-      padding: 40px 20px;
+    .post-card {
+      display: grid;
+      grid-template-columns: minmax(230px, .85fr) minmax(0, 1.1fr);
+      gap: clamp(22px, 4vw, 48px);
+      align-items: center;
+      padding: clamp(16px, 3vw, 26px);
+      border: 1px solid var(--faint);
+      border-radius: var(--radius-lg);
+      background: rgba(255,255,255,.2);
+      box-shadow: 0 16px 44px rgba(41, 31, 20, 0.07);
+      cursor: pointer;
+      transition: transform .35s ease, box-shadow .35s ease, background .35s ease;
+    }
+
+    .post-card:nth-child(even) {
+      grid-template-columns: minmax(0, 1.1fr) minmax(230px, .85fr);
+    }
+
+    .post-card:nth-child(even) .post-media {
+      order: 2;
+    }
+
+    .post-card:hover {
+      transform: translateY(-6px);
+      background: rgba(255,255,255,.33);
+      box-shadow: 0 24px 70px rgba(41, 31, 20, 0.13);
+    }
+
+    .post-media {
+      min-height: 330px;
+      position: relative;
+      overflow: hidden;
+      border-radius: 27px;
+      border: 1px solid rgba(23,19,15,.1);
+      background: #ded1bf;
+    }
+
+    .post-media img {
+      width: 100%;
+      height: 100%;
+      min-height: 330px;
+      display: block;
+      object-fit: cover;
+      filter: saturate(.92) contrast(.97) brightness(1.02);
+      transform: scale(1.01);
+      transition: transform .5s ease;
+    }
+
+    .post-card:hover img {
+      transform: scale(1.055);
+    }
+
+    .placeholder-art {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      padding: 28px;
       text-align: center;
-      color: var(--muted);
+      background:
+        linear-gradient(130deg, rgba(255,255,255,.66), rgba(219,207,190,.5)),
+        radial-gradient(circle at 50% 48%, transparent 0 78px, rgba(168,58,45,.84) 79px 89px, transparent 90px),
+        radial-gradient(circle at 52% 85%, rgba(169,130,69,.4), transparent 54px);
     }
 
-    @media (max-width: 860px) {
-      header { padding: 18px; }
-      .constellation {
-        min-height: unset;
-        display: grid;
-        gap: 18px;
-        padding: 18px;
+    .placeholder-art span {
+      max-width: 210px;
+      color: rgba(23,19,15,.46);
+      font-family: ui-serif, Georgia, Cambria, "Times New Roman", serif;
+      font-size: 24px;
+      line-height: 1.1;
+    }
+
+    .post-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 9px;
+      color: var(--muted);
+      font-size: 12px;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+    }
+
+    .post-title {
+      margin: 18px 0 14px;
+      font-family: ui-serif, Georgia, Cambria, "Times New Roman", serif;
+      font-size: clamp(36px, 5.4vw, 76px);
+      font-weight: 400;
+      line-height: .9;
+      letter-spacing: -.07em;
+    }
+
+    .post-summary {
+      max-width: 520px;
+      margin: 0;
+      color: var(--muted);
+      font-family: ui-serif, Georgia, Cambria, "Times New Roman", serif;
+      font-size: clamp(18px, 2vw, 25px);
+      line-height: 1.36;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-top: 22px;
+    }
+
+    .tag {
+      padding: 6px 9px;
+      border: 1px solid rgba(23,19,15,.12);
+      border-radius: 999px;
+      color: var(--muted);
+      background: rgba(255,255,255,.2);
+      font-size: 12px;
+    }
+
+    .read-more {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 24px;
+      color: var(--ink);
+      font-size: 13px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    .read-more::after {
+      content: "→";
+      transform: translateY(-1px);
+    }
+
+    .detail-view {
+      display: none;
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 66px clamp(18px, 4vw, 46px) 120px;
+    }
+
+    .detail-view.active { display: block; }
+
+    .back-button {
+      display: inline-flex;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 36px;
+      border: 1px solid var(--faint);
+      border-radius: 999px;
+      padding: 10px 14px;
+      color: var(--muted);
+      background: rgba(255,255,255,.22);
+      cursor: pointer;
+      font-size: 13px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .detail-hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(280px, .85fr);
+      gap: clamp(30px, 6vw, 74px);
+      align-items: start;
+    }
+
+    .detail-main-image {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid var(--faint);
+      background: rgba(255,255,255,.28);
+      box-shadow: var(--shadow);
+    }
+
+    .detail-main-image img {
+      width: 100%;
+      display: block;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+    }
+
+    .detail-info {
+      position: sticky;
+      top: 116px;
+      padding-top: 10px;
+    }
+
+    .detail-title {
+      margin: 0 0 18px;
+      font-family: ui-serif, Georgia, Cambria, "Times New Roman", serif;
+      font-size: clamp(54px, 7vw, 98px);
+      font-weight: 400;
+      line-height: .84;
+      letter-spacing: -.08em;
+    }
+
+    .detail-summary {
+      color: var(--muted);
+      font-family: ui-serif, Georgia, Cambria, "Times New Roman", serif;
+      font-size: 24px;
+      line-height: 1.35;
+    }
+
+    .detail-section {
+      margin-top: 34px;
+      padding-top: 22px;
+      border-top: 1px solid var(--faint);
+    }
+
+    .detail-section h3 {
+      margin: 0 0 12px;
+      color: var(--muted);
+      font-size: 12px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+
+    .detail-section p,
+    .detail-section .haiku {
+      margin: 0;
+      color: var(--ink);
+      font-family: ui-serif, Georgia, Cambria, "Times New Roman", serif;
+      font-size: 19px;
+      line-height: 1.55;
+    }
+
+    .haiku {
+      white-space: pre-line;
+    }
+
+    .gallery-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 26px;
+    }
+
+    .gallery-strip img,
+    .gallery-placeholder {
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: cover;
+      border: 1px solid var(--faint);
+      border-radius: 22px;
+      background: rgba(255,255,255,.3);
+    }
+
+    .gallery-placeholder {
+      display: grid;
+      place-items: center;
+      padding: 20px;
+      color: rgba(23,19,15,.38);
+      text-align: center;
+      font-family: ui-serif, Georgia, Cambria, "Times New Roman", serif;
+    }
+
+    .footer {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 42px clamp(18px, 4vw, 46px) 54px;
+      border-top: 1px solid var(--faint);
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      font-size: 13px;
+    }
+
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 60;
+      display: none;
+      place-items: center;
+      padding: 18px;
+      background: rgba(24, 19, 14, .36);
+      backdrop-filter: blur(10px);
+    }
+
+    .modal-backdrop.active { display: grid; }
+
+    .modal {
+      width: min(680px, 100%);
+      max-height: min(760px, 86vh);
+      overflow: auto;
+      border: 1px solid rgba(255,255,255,.26);
+      border-radius: 30px;
+      padding: clamp(24px, 4vw, 42px);
+      background: rgba(246, 239, 229, .96);
+      box-shadow: var(--shadow);
+    }
+
+    .modal-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+      gap: 18px;
+      margin-bottom: 22px;
+    }
+
+    .modal h2 {
+      margin: 0;
+      font-family: ui-serif, Georgia, Cambria, "Times New Roman", serif;
+      font-size: 46px;
+      font-weight: 400;
+      letter-spacing: -.06em;
+    }
+
+    .close-button {
+      border: 1px solid var(--faint);
+      border-radius: 999px;
+      width: 38px;
+      height: 38px;
+      background: rgba(255,255,255,.25);
+      cursor: pointer;
+    }
+
+    .modal p {
+      color: var(--muted);
+      font-family: ui-serif, Georgia, Cambria, "Times New Roman", serif;
+      font-size: 20px;
+      line-height: 1.48;
+    }
+
+    .modal code {
+      color: var(--ink);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      font-size: .9em;
+    }
+
+    .empty-state {
+      display: none;
+      padding: 54px 20px;
+      border: 1px dashed var(--faint);
+      border-radius: var(--radius-lg);
+      color: var(--muted);
+      text-align: center;
+      font-family: ui-serif, Georgia, Cambria, "Times New Roman", serif;
+      font-size: 22px;
+    }
+
+    .empty-state.active { display: block; }
+
+    @media (max-width: 920px) {
+      .topbar {
+        grid-template-columns: 1fr auto;
       }
-      .constellation::before { display: none; }
-      .piece, .haiku-note {
-        position: relative;
-        inset: auto;
-        width: 100%;
-        transform: none;
+
+      .language-switch {
+        grid-column: 2;
+        grid-row: 1;
       }
-      .archive-row {
+
+      .top-links {
+        grid-column: 1 / -1;
+        justify-self: start;
+        flex-wrap: wrap;
+      }
+
+      .hero,
+      .layout,
+      .detail-hero {
         grid-template-columns: 1fr;
-        gap: 8px;
       }
+
+      .hero {
+        padding-top: 54px;
+      }
+
+      .side-panel {
+        position: relative;
+        top: auto;
+        display: block;
+      }
+
+      .filter-list {
+        display: flex;
+        gap: 9px;
+        overflow-x: auto;
+        padding-bottom: 6px;
+      }
+
+      .filter-button {
+        width: auto;
+        flex: 0 0 auto;
+        gap: 8px;
+        padding: 9px 12px;
+        border: 1px solid var(--faint);
+        border-radius: 999px;
+        background: rgba(255,255,255,.2);
+      }
+
+      .mini-note { display: none; }
+
+      .post-card,
+      .post-card:nth-child(even) {
+        grid-template-columns: 1fr;
+      }
+
+      .post-card:nth-child(even) .post-media {
+        order: 0;
+      }
+
+      .detail-info {
+        position: relative;
+        top: auto;
+      }
+
+      .gallery-strip {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .topbar {
+        padding: 14px;
+      }
+
+      .brand-main { font-size: 22px; }
+      .top-links { gap: 10px; }
+      .hero-card { transform: none; }
+      .hero-card-inner { min-height: 300px; }
+      .post-media, .post-media img { min-height: 250px; }
+      .footer { flex-direction: column; }
     }
   </style>
 </head>
 <body>
-  <div class="grain" aria-hidden="true"></div>
+  <div class="site-shell" id="app">
+    <header class="topbar">
+      <a href="#" class="brand" id="homeLink" aria-label="Muratomo Haiku home">
+        <span class="brand-main">Muratomo Haiku</span>
+        <span class="brand-sub" data-i18n="brandSub">çizimler · notlar · küçük yansımalar</span>
+      </a>
 
-  <header>
-    <div class="mark">Muratomo Haiku</div>
-    <a class="soft-link" href="#archive">Archive</a>
-  </header>
-
-  <main>
-    <section class="hero" id="top">
-      <div class="hero-inner">
-        <div class="kicker">drawings · notes · small reflections</div>
-        <h1>Muratomo<br>Haiku</h1>
-        <p class="subtitle">A quiet place for studies, unfinished traces, and the small moments that stay after looking.</p>
-        <button class="enter" onclick="document.querySelector('#room').scrollIntoView()">
-          enter the room <span>↓</span>
-        </button>
+      <div class="language-switch" aria-label="Language switch">
+        <button type="button" data-lang-button="tr" class="active">TR</button>
+        <button type="button" data-lang-button="en">EN</button>
       </div>
-    </section>
 
-    <section class="room" id="room">
-      <p class="room-intro">No categories. No explanation. Just a few objects left on the table: a drawing, a technique, a sentence, a weather inside.</p>
+      <nav class="top-links" aria-label="Site links">
+        <button type="button" data-page="info">Info</button>
+        <button type="button" data-page="about">About</button>
+        <button type="button" data-page="privacy">Privacy Policy</button>
+        <button type="button" data-page="contact">Contact</button>
+      </nav>
+    </header>
 
-      <div class="constellation" id="constellation">
-        <article class="piece p1" data-depth="18">
-          <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=900&q=80" alt="A study table with paint brushes" />
-          <h2>First study</h2>
-          <p>A small exercise in seeing the same object twice: once with the eye, once with the hand.</p>
-          <div class="meta"><span>study</span><span>may 2026</span></div>
-        </article>
-
-        <article class="piece p2" data-depth="26">
-          <img src="https://images.unsplash.com/photo-1459908676235-d5f02a50184b?auto=format&fit=crop&w=900&q=80" alt="Soft abstract watercolor texture" />
-          <h2>Light note</h2>
-          <p>What I learned: the blank space is not empty. It is waiting for pressure, water, and restraint.</p>
-          <div class="meta"><span>technique</span><span>watercolor</span></div>
-        </article>
-
-        <div class="haiku-note" data-depth="34">
-          morning paper<br>
-          a line tries to become<br>
-          a quiet leaf
+    <main id="homeView">
+      <section class="hero" aria-label="Intro">
+        <div>
+          <span class="hero-kicker" data-i18n="heroKicker">analog arşiv / dijital oda</span>
+          <h1>Muratomo<br>Haiku</h1>
+          <p class="hero-copy" data-i18n="heroCopy">Masa üstünde kalan çizimler, dövüş notları, objeler, teknik denemeler ve hayatın küçük yankıları.</p>
         </div>
 
-        <article class="piece p3" data-depth="14">
-          <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80" alt="Quiet landscape in soft daylight" />
-          <h2>After walking</h2>
-          <p>A reflection about distance, routine, and the strange calm that appears after paying attention.</p>
-          <div class="meta"><span>reflection</span><span>walk</span></div>
-        </article>
+        <aside class="hero-card" aria-label="Featured note">
+          <div class="hero-card-inner">
+            <div class="hero-card-title">Atemi<br>Zone</div>
+            <div class="hero-card-note" data-i18n="heroNote">kırmızı halka / el durmadan önce / mesafe konuşur</div>
+          </div>
+        </aside>
+      </section>
 
-        <article class="piece p4" data-depth="22">
-          <img src="https://images.unsplash.com/photo-1515405295579-ba7b45403062?auto=format&fit=crop&w=900&q=80" alt="Minimal sketchbook on a table" />
-          <h2>Unfinished trace</h2>
-          <p>Not every drawing needs to become an artwork. Some are only evidence of a question.</p>
-          <div class="meta"><span>sketch</span><span>unfinished</span></div>
-        </article>
+      <section class="layout" aria-label="Post stream">
+        <aside class="side-panel">
+          <div class="side-title" data-i18n="filterTitle">Kılavuz kelimeler</div>
+          <div class="filter-list" id="filterList"></div>
+          <div class="mini-note" data-i18n="sideNote">Kategoriler değil; izler. Bir kelimeye dokununca akış sadece o ruh halindeki işleri gösterir.</div>
+        </aside>
 
-        <article class="piece p5" data-depth="30">
-          <img src="https://images.unsplash.com/photo-1490818387583-1baba5e638af?auto=format&fit=crop&w=900&q=80" alt="A quiet still life arrangement" />
-          <h2>Still life</h2>
-          <p>A small object, a shadow, a lesson about patience. The technique is only half of the work.</p>
-          <div class="meta"><span>drawing</span><span>graphite</span></div>
-        </article>
+        <div class="stream">
+          <div class="stream-head">
+            <h2 class="stream-title" id="streamTitle">Akış</h2>
+            <div class="stream-count" id="streamCount">0 entries</div>
+          </div>
+          <div class="posts" id="posts"></div>
+          <div class="empty-state" id="emptyState" data-i18n="emptyState">Bu etikette henüz bir iz yok.</div>
+        </div>
+      </section>
+    </main>
+
+    <main class="detail-view" id="detailView" aria-live="polite"></main>
+
+    <footer class="footer">
+      <div>Muratomo Haiku · <span data-i18n="footerLine">çizimler, notlar ve küçük yansımalar</span></div>
+      <div>© Murat</div>
+    </footer>
+  </div>
+
+  <div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <section class="modal">
+      <div class="modal-head">
+        <h2 id="modalTitle">Info</h2>
+        <button class="close-button" type="button" id="closeModal" aria-label="Close">×</button>
       </div>
+      <div id="modalBody"></div>
     </section>
-
-    <section class="archive" id="archive">
-      <div class="archive-box">
-        <a class="archive-row" href="#room">
-          <span class="row-date">14 May</span>
-          <span class="row-title">First study</span>
-          <span class="row-type">study</span>
-        </a>
-        <a class="archive-row" href="#room">
-          <span class="row-date">Later</span>
-          <span class="row-title">Light note</span>
-          <span class="row-type">technique</span>
-        </a>
-        <a class="archive-row" href="#room">
-          <span class="row-date">Soon</span>
-          <span class="row-title">Unfinished trace</span>
-          <span class="row-type">sketch</span>
-        </a>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    Muratomo Haiku · drawings, notes, and small reflections
-  </footer>
+  </div>
 
   <script>
-    const room = document.querySelector('#constellation');
-    const moving = document.querySelectorAll('[data-depth]');
+    const siteText = {
+      tr: {
+        brandSub: "çizimler · notlar · küçük yansımalar",
+        heroKicker: "analog arşiv / dijital oda",
+        heroCopy: "Masa üstünde kalan çizimler, dövüş notları, objeler, teknik denemeler ve hayatın küçük yankıları.",
+        heroNote: "kırmızı halka / el durmadan önce / mesafe konuşur",
+        filterTitle: "Kılavuz kelimeler",
+        sideNote: "Kategoriler değil; izler. Bir kelimeye dokununca akış sadece o ruh halindeki işleri gösterir.",
+        stream: "Akış",
+        entries: "iz",
+        all: "Hepsi",
+        emptyState: "Bu etikette henüz bir iz yok.",
+        readMore: "içine gir",
+        back: "akışa dön",
+        technique: "Teknik",
+        reflection: "Yansıma",
+        haiku: "Haiku",
+        gallery: "Yakın izler",
+        footerLine: "çizimler, notlar ve küçük yansımalar",
+        pages: {
+          info: {
+            title: "Info",
+            body: `<p><strong>Muratomo Haiku</strong>, kategori mantığından çok iz mantığıyla çalışan kişisel bir akış. Soldaki kelimeler birer klasör değil; ruh hali, konu ve teknik işareti.</p><p>Yeni işler en üstte görünür. Bir gönderiye tıklayınca görsel, teknik, yansıma ve haiku alanlarıyla daha sakin bir detay sayfası açılır.</p>`
+          },
+          about: {
+            title: "About",
+            body: `<p>Muratomo Haiku, Murat'ın çizim, not, obje, dövüş sanatı çalışmaları ve kısa iç yansımaları için sessiz bir dijital oda.</p><p>Bazı işler tamamlanmış eserlerdir. Bazıları yalnızca bir masada kalmış izlerdir.</p>`
+          },
+          privacy: {
+            title: "Privacy Policy",
+            body: `<p>Bu ilk taslak herhangi bir takip çerezi, üyelik sistemi veya reklam ağı kullanmaz.</p><p>İleride iletişim formu, analiz aracı veya bülten eklenirse bu sayfa güncellenmelidir.</p>`
+          },
+          contact: {
+            title: "Contact",
+            body: `<p>İletişim için buraya e-posta, Instagram veya tercih edilen bir bağlantı eklenebilir.</p><p>Örnek: <code>hello@muratomohaiku.com</code></p>`
+          }
+        }
+      },
+      en: {
+        brandSub: "drawings · notes · small reflections",
+        heroKicker: "analog archive / digital room",
+        heroCopy: "Drawings left on the desk, martial notes, objects, technique studies, and small echoes from life.",
+        heroNote: "red circle / before the hand moves / distance speaks",
+        filterTitle: "Guide words",
+        sideNote: "Not categories; traces. Touching a word narrows the stream to that mood, material, or question.",
+        stream: "Stream",
+        entries: "entries",
+        all: "All",
+        emptyState: "There is no trace under this word yet.",
+        readMore: "enter",
+        back: "back to stream",
+        technique: "Technique",
+        reflection: "Reflection",
+        haiku: "Haiku",
+        gallery: "Close traces",
+        footerLine: "drawings, notes, and small reflections",
+        pages: {
+          info: {
+            title: "Info",
+            body: `<p><strong>Muratomo Haiku</strong> is a personal stream organized by traces rather than strict categories. The words on the left are not folders; they are moods, subjects, and material signals.</p><p>New entries appear first. Clicking an entry opens a quieter detail page with image, technique, reflection, and haiku.</p>`
+          },
+          about: {
+            title: "About",
+            body: `<p>Muratomo Haiku is a quiet digital room for Murat's drawings, notes, objects, martial art studies, and short inner reflections.</p><p>Some works are finished pieces. Some are only traces left on a desk.</p>`
+          },
+          privacy: {
+            title: "Privacy Policy",
+            body: `<p>This first prototype does not use tracking cookies, member accounts, or ad networks.</p><p>If a contact form, analytics, or newsletter is added later, this page should be updated.</p>`
+          },
+          contact: {
+            title: "Contact",
+            body: `<p>Add an email, Instagram, or preferred contact link here.</p><p>Example: <code>hello@muratomohaiku.com</code></p>`
+          }
+        }
+      }
+    };
 
-    room?.addEventListener('pointermove', (event) => {
-      const rect = room.getBoundingClientRect();
-      const x = (event.clientX - rect.left) / rect.width - 0.5;
-      const y = (event.clientY - rect.top) / rect.height - 0.5;
+    const filters = [
+      { id: "all", tr: "Hepsi", en: "All" },
+      { id: "martial", tr: "Dövüş Sanatları", en: "Martial Arts" },
+      { id: "life", tr: "Hayat", en: "Life" },
+      { id: "emotions", tr: "Duygular", en: "Emotions" },
+      { id: "objects", tr: "Objeler", en: "Objects" },
+      { id: "sketch", tr: "Eskiz", en: "Sketch" },
+      { id: "technique", tr: "Teknik", en: "Technique" },
+      { id: "haiku", tr: "Haiku", en: "Haiku" }
+    ];
 
-      moving.forEach((item) => {
-        const depth = Number(item.dataset.depth || 10);
-        item.style.translate = `${x * depth}px ${y * depth}px`;
+    const posts = [
+      {
+        id: "atemi-zone",
+        date: "2026-05-14",
+        tags: ["martial", "sketch", "life", "haiku"],
+        image: "assets/atemi-zone.jpg",
+        title: { tr: "Atemi Zone", en: "Atemi Zone" },
+        summary: {
+          tr: "Mesafe, niyet ve hareket öncesi sessizlik üzerine kırmızı halkalı bir çalışma.",
+          en: "A red-ring study on distance, intention, and the silence before movement."
+        },
+        technique: {
+          tr: "Kâğıt üzerine karışık teknik: marker, mürekkep, suluboya izi ve el yazısı notlar.",
+          en: "Mixed media on paper: marker, ink, watercolor traces, and handwritten notes."
+        },
+        reflection: {
+          tr: "Bu çizimde ilgimi çeken şey vuruşun kendisi değil, vuruştan önceki boşluktu. Bazen çizgi de hareket gibi davranıyor; niyet görünmeden önce alanı işaretliyor.",
+          en: "What interested me here was not the strike itself, but the space before it. Sometimes a line behaves like movement; it marks the field before intention becomes visible."
+        },
+        haiku: {
+          tr: "kırmızı halka\nel durmadan önce\nmesafe konuşur",
+          en: "red circle\nbefore the hand moves\ndistance speaks"
+        }
+      },
+      {
+        id: "grey-map-blossoms",
+        date: "2026-05-10",
+        tags: ["sketch", "emotions", "haiku"],
+        image: "assets/grey-map-blossoms.jpg",
+        title: { tr: "Gri Harita, Kırmızı Çiçek", en: "Grey Map, Red Blossoms" },
+        summary: {
+          tr: "Defter sayfasında küçük bir yol, birkaç kırmızı çiçek ve kenarda kalmış notlar.",
+          en: "A small road on a notebook page, a few red blossoms, and notes left at the edge."
+        },
+        technique: {
+          tr: "Spiral defter üzerine ince kalem, gri yıkama, kırmızı vurgu ve yazı katmanları.",
+          en: "Fine pen, grey wash, red accents, and writing layers on a spiral notebook page."
+        },
+        reflection: {
+          tr: "Bir sayfanın tamamı dolduğunda bile bazı boşluklar kalıyor. Galiba o boşluklar çizimin nefes aldığı yerler.",
+          en: "Even when a page feels full, some spaces remain. Maybe those are the places where the drawing breathes."
+        },
+        haiku: {
+          tr: "gri bir sabah\nkırmızı çiçek açar\nyol kenarında",
+          en: "grey morning\nred blossoms appear\nbeside the road"
+        }
+      },
+      {
+        id: "owl-bookmark",
+        date: "2026-05-06",
+        tags: ["objects", "sketch", "life"],
+        image: "assets/owl-bookmark.jpg",
+        title: { tr: "Baykuş Ayraç", en: "Owl Bookmark" },
+        summary: {
+          tr: "Uzun, dar bir kâğıtta duran baykuş; okuma, bekleme ve gece fikri üzerine küçük bir iz.",
+          en: "An owl on a narrow strip of paper; a small trace about reading, waiting, and the idea of night."
+        },
+        technique: {
+          tr: "Küçük format üzerinde suluboya, mürekkep çizgisi ve el yazısı cümleler.",
+          en: "Watercolor, ink line, and handwritten sentences on a small vertical format."
+        },
+        reflection: {
+          tr: "Bazı işler resimden çok eşya gibi hissettiriyor. Bu ayraç da defterin içinde saklanan küçük bir gece gibi.",
+          en: "Some works feel more like objects than images. This bookmark feels like a small night kept inside a notebook."
+        },
+        haiku: {
+          tr: "ince kâğıtta\nbir baykuş bekliyor\nsayfa kararır",
+          en: "on thin paper\nan owl waits quietly\nthe page grows dark"
+        }
+      },
+      {
+        id: "small-objects",
+        date: "2026-05-02",
+        tags: ["objects", "life", "emotions"],
+        image: "assets/small-objects.jpg",
+        title: { tr: "Küçük Objeler", en: "Small Objects" },
+        summary: {
+          tr: "Taş, pirinç obje ve masada kalmış formlar: gündelik nesnelerin sessiz düzeni.",
+          en: "Stone, brass object, and forms left on the desk: the quiet order of daily objects."
+        },
+        technique: {
+          tr: "Fotoğraf, gözlem ve ileride çizime dönüşebilecek nesne arşivi.",
+          en: "Photography, observation, and an object archive that may later turn into drawings."
+        },
+        reflection: {
+          tr: "Objeler bazen yapılmış şeyler gibi değil, bulunmuş cümleler gibi duruyor. Masada sessizce bekliyorlar.",
+          en: "Objects sometimes feel less like made things and more like found sentences. They wait quietly on the desk."
+        },
+        haiku: {
+          tr: "küçük bir taş\npirinç gövdenin yanında\nzaman ağırdır",
+          en: "a small stone\nbeside a brass body\ntime feels heavy"
+        }
+      },
+      {
+        id: "desk-device-note",
+        date: "2026-04-29",
+        tags: ["technique", "objects", "sketch"],
+        image: "assets/desk-device-note.jpg",
+        title: { tr: "Masa Üstü Deneme", en: "Desk Test" },
+        summary: {
+          tr: "Kablo, ölçüm, küçük cihaz ve defter: teknik düşüncenin gündelik masadaki hali.",
+          en: "Cables, measuring, a small device, and a notebook: technical thought on an everyday desk."
+        },
+        technique: {
+          tr: "Süreç fotoğrafı; obje, elektronik ve not almanın aynı kompozisyonda buluşması.",
+          en: "Process photograph; object, electronics, and note-taking meeting in the same composition."
+        },
+        reflection: {
+          tr: "Teknik olan şey de şiirsel olabilir. Özellikle kablolar, sayılar ve eller aynı anda görünüyorsa.",
+          en: "Technical things can also be poetic, especially when cables, numbers, and hands appear together."
+        },
+        haiku: {
+          tr: "küçük ekranda\nbir sayı yanıp söner\nel not alırken",
+          en: "on a small screen\na number flickers softly\nwhile the hand writes"
+        }
+      }
+    ];
+
+    let currentLang = "tr";
+    let currentFilter = "all";
+
+    const homeView = document.querySelector("#homeView");
+    const detailView = document.querySelector("#detailView");
+    const filterList = document.querySelector("#filterList");
+    const postsEl = document.querySelector("#posts");
+    const streamTitle = document.querySelector("#streamTitle");
+    const streamCount = document.querySelector("#streamCount");
+    const emptyState = document.querySelector("#emptyState");
+    const modalBackdrop = document.querySelector("#modalBackdrop");
+    const modalTitle = document.querySelector("#modalTitle");
+    const modalBody = document.querySelector("#modalBody");
+
+    const formatDate = (dateString) => {
+      const date = new Date(`${dateString}T12:00:00`);
+      return new Intl.DateTimeFormat(currentLang === "tr" ? "tr-TR" : "en-US", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric"
+      }).format(date);
+    };
+
+    const labelForFilter = (id) => {
+      const filter = filters.find((item) => item.id === id);
+      return filter ? filter[currentLang] : id;
+    };
+
+    const placeholder = (label) => `
+      <div class="placeholder-art" aria-hidden="true">
+        <span>${label}<br><small style="font-size:13px; letter-spacing:.08em; text-transform:uppercase;">image placeholder</small></span>
+      </div>
+    `;
+
+    const imageMarkup = (post, className = "") => `
+      <img class="${className}" src="${post.image}" alt="${post.title[currentLang]}" onerror="this.style.display='none'; this.insertAdjacentHTML('afterend', \`${placeholder(post.title[currentLang])}\`);" />
+    `;
+
+    function applyText() {
+      const text = siteText[currentLang];
+      document.documentElement.lang = currentLang;
+      document.documentElement.dataset.lang = currentLang;
+      document.querySelectorAll("[data-i18n]").forEach((node) => {
+        const key = node.dataset.i18n;
+        if (text[key]) node.textContent = text[key];
+      });
+      document.querySelectorAll("[data-lang-button]").forEach((button) => {
+        button.classList.toggle("active", button.dataset.langButton === currentLang);
+      });
+    }
+
+    function renderFilters() {
+      filterList.innerHTML = filters.map((filter) => `
+        <button class="filter-button ${currentFilter === filter.id ? "active" : ""}" type="button" data-filter="${filter.id}">
+          <span>${filter[currentLang]}</span>
+          <span class="dot" aria-hidden="true"></span>
+        </button>
+      `).join("");
+
+      filterList.querySelectorAll("[data-filter]").forEach((button) => {
+        button.addEventListener("click", () => {
+          currentFilter = button.dataset.filter;
+          render();
+        });
+      });
+    }
+
+    function filteredPosts() {
+      return posts
+        .slice()
+        .sort((a, b) => b.date.localeCompare(a.date))
+        .filter((post) => currentFilter === "all" || post.tags.includes(currentFilter));
+    }
+
+    function renderPosts() {
+      const text = siteText[currentLang];
+      const visible = filteredPosts();
+      streamTitle.textContent = currentFilter === "all" ? text.stream : labelForFilter(currentFilter);
+      streamCount.textContent = `${visible.length} ${text.entries}`;
+      emptyState.classList.toggle("active", visible.length === 0);
+
+      postsEl.innerHTML = visible.map((post) => `
+        <article class="post-card" tabindex="0" role="button" data-post-id="${post.id}" aria-label="${post.title[currentLang]}">
+          <div class="post-media">
+            ${imageMarkup(post)}
+          </div>
+          <div class="post-content">
+            <div class="post-meta">
+              <span>${formatDate(post.date)}</span>
+              <span>·</span>
+              <span>${post.tags.map(labelForFilter).slice(0, 2).join(" / ")}</span>
+            </div>
+            <h3 class="post-title">${post.title[currentLang]}</h3>
+            <p class="post-summary">${post.summary[currentLang]}</p>
+            <div class="tags">
+              ${post.tags.map((tag) => `<span class="tag">#${labelForFilter(tag)}</span>`).join("")}
+            </div>
+            <span class="read-more">${text.readMore}</span>
+          </div>
+        </article>
+      `).join("");
+
+      postsEl.querySelectorAll("[data-post-id]").forEach((card) => {
+        const open = () => showDetail(card.dataset.postId);
+        card.addEventListener("click", open);
+        card.addEventListener("keydown", (event) => {
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            open();
+          }
+        });
+      });
+    }
+
+    function showDetail(id) {
+      const post = posts.find((item) => item.id === id);
+      if (!post) return;
+      const text = siteText[currentLang];
+      homeView.style.display = "none";
+      detailView.classList.add("active");
+      detailView.innerHTML = `
+        <button class="back-button" type="button" id="backButton">← ${text.back}</button>
+        <section class="detail-hero">
+          <div>
+            <div class="detail-main-image">
+              ${imageMarkup(post)}
+            </div>
+            <div class="gallery-strip">
+              <div class="gallery-placeholder">detail image 01</div>
+              <div class="gallery-placeholder">detail image 02</div>
+              <div class="gallery-placeholder">desk / process</div>
+            </div>
+          </div>
+
+          <aside class="detail-info">
+            <div class="post-meta">
+              <span>${formatDate(post.date)}</span>
+              <span>·</span>
+              <span>${post.tags.map(labelForFilter).join(" / ")}</span>
+            </div>
+            <h2 class="detail-title">${post.title[currentLang]}</h2>
+            <p class="detail-summary">${post.summary[currentLang]}</p>
+            <div class="tags">
+              ${post.tags.map((tag) => `<span class="tag">#${labelForFilter(tag)}</span>`).join("")}
+            </div>
+
+            <section class="detail-section">
+              <h3>${text.technique}</h3>
+              <p>${post.technique[currentLang]}</p>
+            </section>
+            <section class="detail-section">
+              <h3>${text.reflection}</h3>
+              <p>${post.reflection[currentLang]}</p>
+            </section>
+            <section class="detail-section">
+              <h3>${text.haiku}</h3>
+              <div class="haiku">${post.haiku[currentLang]}</div>
+            </section>
+          </aside>
+        </section>
+      `;
+      document.querySelector("#backButton").addEventListener("click", showHome);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function showHome() {
+      detailView.classList.remove("active");
+      detailView.innerHTML = "";
+      homeView.style.display = "block";
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function openModal(page) {
+      const data = siteText[currentLang].pages[page];
+      if (!data) return;
+      modalTitle.textContent = data.title;
+      modalBody.innerHTML = data.body;
+      modalBackdrop.classList.add("active");
+    }
+
+    function closeModal() {
+      modalBackdrop.classList.remove("active");
+    }
+
+    function render() {
+      applyText();
+      renderFilters();
+      renderPosts();
+      if (detailView.classList.contains("active")) showHome();
+    }
+
+    document.querySelectorAll("[data-lang-button]").forEach((button) => {
+      button.addEventListener("click", () => {
+        currentLang = button.dataset.langButton;
+        render();
       });
     });
 
-    room?.addEventListener('pointerleave', () => {
-      moving.forEach((item) => {
-        item.style.translate = '0 0';
-      });
+    document.querySelectorAll("[data-page]").forEach((button) => {
+      button.addEventListener("click", () => openModal(button.dataset.page));
     });
+
+    document.querySelector("#closeModal").addEventListener("click", closeModal);
+    modalBackdrop.addEventListener("click", (event) => {
+      if (event.target === modalBackdrop) closeModal();
+    });
+
+    document.querySelector("#homeLink").addEventListener("click", (event) => {
+      event.preventDefault();
+      showHome();
+    });
+
+    render();
   </script>
 </body>
 </html>
