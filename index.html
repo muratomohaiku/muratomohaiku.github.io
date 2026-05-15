@@ -891,8 +891,9 @@ sessizce</div>
     }
 
     const instagramUrl = "https://www.instagram.com/murattakc/";
-    const visitorCounterId = "muratomohaiku-main-visitor-count-v1";
-    const visitorCounterSessionKey = "muratomo-visitor-counted-v1";
+    const visitorCounterNamespace = "muratomohaiku";
+    const visitorCounterName = "site-visits";
+    const visitorCounterSessionKey = "muratomo-visitor-counted-v2";
 
     const defaultSiteData = {
       site: {
@@ -1110,9 +1111,10 @@ sessizce</div>
       if (!data || typeof data !== "object") return null;
 
       const possibleValues = [
-        data.total,
         data.count,
         data.value,
+        data.total,
+        data.total_count,
         data.data,
         data.result
       ];
@@ -1131,12 +1133,12 @@ sessizce</div>
 
       const alreadyCountedThisSession = sessionStorage.getItem(visitorCounterSessionKey) === "1";
       const endpoint = alreadyCountedThisSession
-        ? `https://api.countify.xyz/get-total/${visitorCounterId}`
-        : `https://api.countify.xyz/increment/${visitorCounterId}`;
+        ? `https://api.counterapi.dev/v1/${visitorCounterNamespace}/${visitorCounterName}`
+        : `https://api.counterapi.dev/v1/${visitorCounterNamespace}/${visitorCounterName}/up`;
 
       try {
         const response = await fetch(endpoint, {
-          method: alreadyCountedThisSession ? "GET" : "POST",
+          method: "GET",
           cache: "no-store"
         });
 
