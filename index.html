@@ -1017,37 +1017,79 @@ sessizce</div>
     }
 
     function trEnLine() {
-      return currentLang === "tr"
-        ? "çizimler · notlar · küçük yansımalar"
-        : "drawings · notes · small reflections";
-    }
+  return currentLang === "tr"
+    ? "çizimler · notlar · küçük yansımalar"
+    : "drawings · notes · small reflections";
+}
 
-    function updateStaticText() {
-      const site = siteData.site;
-      qs("#brandName").textContent = site.brand_name || "Muratomo Haiku";
-      qs("#brandSub").textContent = "by Murat Akcayigit";
-      qs("#heroKicker").textContent = "by Murat Akcayigit";
-      qs("#heroTitle").innerHTML = (site.brand_name || "Muratomo Haiku").replace(" ", "<br>");
-      qs("#heroCopy").textContent = trEnLine();
+function updateStaticText() {
+  const site = siteData.site || {};
 
-      const lineBreak = String.fromCharCode(10);
-      const carriageReturn = String.fromCharCode(13);
+  const brandName = qs("#brandName");
+  const brandSub = qs("#brandSub");
+  const heroKicker = qs("#heroKicker");
+  const heroTitle = qs("#heroTitle");
+  const heroCopy = qs("#heroCopy");
+  const featuredTitle = qs("#featuredTitle");
+  const featuredNote = qs("#featuredNote");
+  const filterTitle = qs("#filterTitle");
+  const sideNote = qs("#sideNote");
+  const footerLine = qs("#footerLine");
 
-      qs("#featuredTitle").innerHTML = String(site.featured_title || "Muratomo Haiku")
-        .split(carriageReturn).join("")
-        .split(lineBreak).join("<br>");
+  if (brandName) {
+    brandName.textContent = site.brand_name || "Muratomo Haiku";
+  }
 
-      qs("#featuredNote").textContent = t(site.featured_note);
-      qs("#filterTitle").textContent = t(site.filter_title);
-      qs("#sideNote").textContent = t(site.side_note);
-      qs("#footerLine").textContent = trEnLine();
+  if (brandSub) {
+    brandSub.textContent = "by Murat Akcayigit";
+  }
 
-      document.documentElement.lang = currentLang;
-      document.documentElement.dataset.lang = currentLang;
-      document.querySelectorAll("[data-lang-button]").forEach((button) => {
-        button.classList.toggle("active", button.dataset.langButton === currentLang);
-      });
-    }
+  if (heroKicker) {
+    heroKicker.textContent = "by Murat Akcayigit";
+  }
+
+  if (heroTitle) {
+    heroTitle.innerHTML = (site.brand_name || "Muratomo Haiku").replace(" ", "<br>");
+  }
+
+  if (heroCopy) {
+    heroCopy.textContent = trEnLine();
+  }
+
+  const lineBreak = String.fromCharCode(10);
+  const carriageReturn = String.fromCharCode(13);
+
+  if (featuredTitle) {
+    featuredTitle.innerHTML = String(site.featured_title || "Muratomo Haiku")
+      .split(carriageReturn).join("")
+      .split(lineBreak).join("<br>");
+  }
+
+  if (featuredNote) {
+    featuredNote.textContent = t(site.featured_note);
+  }
+
+  if (filterTitle) {
+    filterTitle.textContent = t(site.filter_title);
+  }
+
+  if (sideNote) {
+    sideNote.textContent = t(site.side_note);
+  }
+
+  if (footerLine) {
+    footerLine.textContent = trEnLine();
+  }
+
+  document.documentElement.lang = currentLang;
+  document.documentElement.dataset.lang = currentLang;
+
+  document.querySelectorAll("[data-lang-button]").forEach((button) => {
+    button.classList.toggle("active", button.dataset.langButton === currentLang);
+  });
+}
+
+  
 
     function renderTopLinks() {
       topLinks.innerHTML = `
