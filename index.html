@@ -676,6 +676,20 @@
       transform: translateY(-1px);
     }
 
+    .visitor-counter {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      letter-spacing: .03em;
+    }
+
+    .visitor-count-number {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      color: var(--ink);
+      letter-spacing: .08em;
+      font-size: 12px;
+    }
+
     .modal-backdrop {
       position: fixed;
       inset: 0;
@@ -750,102 +764,6 @@
 
     .empty-state.active { display: block; }
 
-
-    .hero-featured-card {
-      width: 100%;
-      display: block;
-      text-align: left;
-      color: inherit;
-      cursor: pointer;
-      appearance: none;
-      -webkit-appearance: none;
-      transition: transform .35s ease, box-shadow .35s ease, background .35s ease;
-    }
-
-    .hero-featured-card:hover {
-      transform: rotate(.4deg) translateY(-6px);
-      background: rgba(255,255,255,.34);
-      box-shadow: 0 30px 80px rgba(41, 31, 20, 0.18);
-    }
-
-    .hero-featured-card:disabled {
-      cursor: default;
-    }
-
-    .hero-featured-card:disabled:hover {
-      transform: rotate(1.5deg);
-      background: var(--soft);
-      box-shadow: var(--shadow);
-    }
-
-    .hero-featured-inner {
-      position: relative;
-      min-height: 370px;
-      overflow: hidden;
-      padding: 0;
-    }
-
-    .hero-featured-image {
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(circle at 42% 36%, transparent 0 88px, rgba(168,58,45,.86) 89px 98px, transparent 99px),
-        radial-gradient(circle at 50% 83%, rgba(169,130,69,.54), transparent 54px),
-        linear-gradient(160deg, rgba(255,255,255,.84), rgba(235,226,214,.66));
-    }
-
-    .hero-featured-image img {
-      width: 100%;
-      height: 100%;
-      min-height: 370px;
-      object-fit: cover;
-      display: block;
-      filter: saturate(.92) contrast(.96) brightness(1.02);
-      transform: scale(1.02);
-      transition: transform .55s ease;
-    }
-
-    .hero-featured-card:hover .hero-featured-image img {
-      transform: scale(1.07);
-    }
-
-    .hero-featured-overlay {
-      position: absolute;
-      inset: 0;
-      z-index: 2;
-      display: grid;
-      align-content: space-between;
-      padding: 26px;
-      background:
-        linear-gradient(to bottom, rgba(255,252,245,.86), rgba(255,252,245,.32) 42%, rgba(255,252,245,.78)),
-        radial-gradient(circle at 72% 78%, rgba(169,130,69,.34), transparent 96px);
-    }
-
-    .hero-featured-label {
-      width: max-content;
-      padding: 7px 10px;
-      border: 1px solid rgba(23,19,15,.12);
-      border-radius: 999px;
-      color: var(--muted);
-      background: rgba(255,255,255,.28);
-      font-size: 11px;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-    }
-
-    .hero-featured-enter {
-      margin-top: 20px;
-      color: var(--ink);
-      font-size: 12px;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      opacity: .72;
-    }
-
-    .hero-featured-card:hover .hero-featured-enter {
-      opacity: 1;
-    }
-
     @media (max-width: 920px) {
       .topbar { grid-template-columns: 1fr auto; }
       .language-switch { grid-column: 2; grid-row: 1; }
@@ -868,10 +786,7 @@
       .top-links { gap: 8px; }
       .instagram-link { padding: 8px 10px; }
       .hero-card { transform: none; }
-      .hero-featured-card:hover { transform: translateY(-4px); }
       .hero-card-inner { min-height: 300px; }
-      .hero-featured-inner,
-      .hero-featured-image img { min-height: 300px; }
       .post-media, .post-media img { min-height: 250px; }
       .footer { flex-direction: column; }
     }
@@ -903,20 +818,14 @@
           <p class="hero-copy" id="heroCopy">çizimler · notlar · küçük yansımalar</p>
         </div>
 
-        <button class="hero-card hero-featured-card" type="button" id="featuredCard" aria-label="Featured work">
-          <div class="hero-card-inner hero-featured-inner" id="featuredCardInner">
-            <div class="hero-featured-image" id="featuredImage"></div>
-
-            <div class="hero-featured-overlay">
-              <div class="hero-featured-label" id="featuredLabel">rastgele iz</div>
-              <div class="hero-card-title" id="featuredTitle">Muratomo<br>Haiku</div>
-              <div class="hero-card-note" id="featuredNote">boş bir sayfa
+        <aside class="hero-card" aria-label="Featured note">
+          <div class="hero-card-inner">
+            <div class="hero-card-title" id="featuredTitle">Muratomo<br>Haiku</div>
+            <div class="hero-card-note" id="featuredNote">boş bir sayfa
 yeni izleri bekler
 sessizce</div>
-              <div class="hero-featured-enter" id="featuredEnter">içine gir →</div>
-            </div>
           </div>
-        </button>
+        </aside>
       </section>
 
       <section class="layout" id="works" aria-label="Post stream">
@@ -951,6 +860,11 @@ sessizce</div>
         </a>
         <span class="footer-dot">·</span>
         <span id="footerLine">çizimler · notlar · küçük yansımalar</span>
+        <span class="footer-dot">·</span>
+        <span class="visitor-counter">
+          <span id="visitorCountLabel">Ziyaretçi Sayısı</span>
+          <span class="visitor-count-number" id="visitorCountNumber">0000000</span>
+        </span>
       </div>
       <div>© Murat Akcayigit</div>
     </footer>
@@ -977,6 +891,8 @@ sessizce</div>
     }
 
     const instagramUrl = "https://www.instagram.com/murattakc/";
+    const visitorCounterId = "muratomohaiku-main-visitor-count-v1";
+    const visitorCounterSessionKey = "muratomo-visitor-counted-v1";
 
     const defaultSiteData = {
       site: {
@@ -1030,7 +946,6 @@ sessizce</div>
     let postsData = defaultPostsData;
     let currentLang = localStorage.getItem("muratomo-language") || "tr";
     let currentFilter = "all";
-    let featuredPostId = null;
 
     const qs = (selector) => document.querySelector(selector);
     const homeView = qs("#homeView");
@@ -1094,8 +1009,8 @@ sessizce</div>
       ]);
       siteData = deepMerge(defaultSiteData, site);
       postsData = deepMerge(defaultPostsData, posts);
-      selectRandomFeaturedPost();
       render();
+      loadVisitorCount();
     }
 
     function formatDate(dateString) {
@@ -1129,74 +1044,6 @@ sessizce</div>
         .sort((a, b) => String(b.date || "").localeCompare(String(a.date || "")))
         .filter((post) => currentFilter === "all" || (post.tags || []).includes(currentFilter));
     }
-
-
-    function allVisiblePosts() {
-      return (postsData.posts || [])
-        .filter((post) => post && post.visible !== false)
-        .sort((a, b) => String(b.date || "").localeCompare(String(a.date || "")));
-    }
-
-    function selectRandomFeaturedPost() {
-      const visible = allVisiblePosts();
-
-      if (!visible.length) {
-        featuredPostId = null;
-        return;
-      }
-
-      const randomIndex = Math.floor(Math.random() * visible.length);
-      featuredPostId = visible[randomIndex].id;
-    }
-
-    function featuredPost() {
-      if (!featuredPostId) return null;
-      return allVisiblePosts().find((post) => post.id === featuredPostId) || null;
-    }
-
-    function renderFeaturedCard() {
-      const card = qs("#featuredCard");
-      const image = qs("#featuredImage");
-      const label = qs("#featuredLabel");
-      const title = qs("#featuredTitle");
-      const note = qs("#featuredNote");
-      const enter = qs("#featuredEnter");
-
-      if (!card || !image || !label || !title || !note || !enter) return;
-
-      const post = featuredPost();
-
-      card.onclick = null;
-
-      if (!post) {
-        image.innerHTML = "";
-        label.textContent = currentLang === "tr" ? "başlangıç" : "beginning";
-        title.innerHTML = "Muratomo<br>Haiku";
-        note.textContent = currentLang === "tr"
-          ? "boş bir sayfa\nyeni izleri bekler\nsessizce"
-          : "an empty page\nwaits for new traces\nquietly";
-        enter.textContent = currentLang === "tr" ? "ilk izi bekliyor" : "waiting for the first trace";
-        card.disabled = true;
-        return;
-      }
-
-      const postTitle = t(post.title, "Untitled");
-      const postSummary = t(post.summary);
-      const postImage = post.cover_image;
-
-      card.disabled = false;
-      image.innerHTML = postImage
-        ? `<img src="${postImage}" alt="${postTitle}" onerror="this.remove();" />`
-        : "";
-
-      label.textContent = currentLang === "tr" ? "rastgele iz" : "random trace";
-      title.textContent = postTitle;
-      note.textContent = postSummary || formatDate(post.date);
-      enter.textContent = currentLang === "tr" ? "içine gir →" : "enter →";
-
-      card.onclick = () => showDetail(post.id);
-    }
-
 
     function trEnLine() {
       return currentLang === "tr"
@@ -1236,12 +1083,79 @@ sessizce</div>
       if (sideNote) sideNote.textContent = t(site.side_note);
       if (footerLine) footerLine.textContent = trEnLine();
 
+      const visitorCountLabel = qs("#visitorCountLabel");
+      if (visitorCountLabel) {
+        visitorCountLabel.textContent = currentLang === "tr" ? "Ziyaretçi Sayısı" : "Visitor Count";
+      }
+
       document.documentElement.lang = currentLang;
       document.documentElement.dataset.lang = currentLang;
 
       document.querySelectorAll("[data-lang-button]").forEach((button) => {
         button.classList.toggle("active", button.dataset.langButton === currentLang);
       });
+    }
+
+    function formatVisitorCount(value) {
+      const numericValue = Number(value);
+
+      if (!Number.isFinite(numericValue) || numericValue < 0) {
+        return "0000000";
+      }
+
+      return String(Math.floor(numericValue)).padStart(7, "0");
+    }
+
+    function readCountFromResponse(data) {
+      if (!data || typeof data !== "object") return null;
+
+      const possibleValues = [
+        data.total,
+        data.count,
+        data.value,
+        data.data,
+        data.result
+      ];
+
+      for (const value of possibleValues) {
+        const number = Number(value);
+        if (Number.isFinite(number)) return number;
+      }
+
+      return null;
+    }
+
+    async function loadVisitorCount() {
+      const numberEl = qs("#visitorCountNumber");
+      if (!numberEl) return;
+
+      const alreadyCountedThisSession = sessionStorage.getItem(visitorCounterSessionKey) === "1";
+      const endpoint = alreadyCountedThisSession
+        ? `https://api.countify.xyz/get-total/${visitorCounterId}`
+        : `https://api.countify.xyz/increment/${visitorCounterId}`;
+
+      try {
+        const response = await fetch(endpoint, {
+          method: alreadyCountedThisSession ? "GET" : "POST",
+          cache: "no-store"
+        });
+
+        if (!response.ok) throw new Error("Visitor counter unavailable");
+
+        const data = await response.json();
+        const count = readCountFromResponse(data);
+
+        if (count === null) throw new Error("Visitor counter response unreadable");
+
+        if (!alreadyCountedThisSession) {
+          sessionStorage.setItem(visitorCounterSessionKey, "1");
+        }
+
+        numberEl.textContent = formatVisitorCount(count);
+      } catch (error) {
+        console.warn(error.message);
+        numberEl.textContent = "0000000";
+      }
     }
 
     function renderTopLinks() {
@@ -1384,7 +1298,6 @@ sessizce</div>
       renderTopLinks();
       renderFilters();
       renderPosts();
-      renderFeaturedCard();
       if (detailView.classList.contains("active")) showHome();
     }
 
