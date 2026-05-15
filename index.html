@@ -1153,10 +1153,11 @@ sessizce</div>
           sessionStorage.setItem(visitorCounterSessionKey, "1");
         }
 
-        numberEl.textContent = formatVisitorCount(count);
+        localStorage.setItem("muratomo-last-visitor-count", String(count));
       } catch (error) {
         console.warn(error.message);
-        numberEl.textContent = "0000000";
+        const cachedCount = localStorage.getItem("muratomo-last-visitor-count");
+numberEl.textContent = cachedCount ? formatVisitorCount(cachedCount) : "0000000";
       }
     }
 
