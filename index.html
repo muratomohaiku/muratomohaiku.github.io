@@ -19,6 +19,7 @@
       --brass: #a98245;
       --shadow: 0 24px 70px rgba(41, 31, 20, 0.15);
       --radius-lg: 34px;
+      --radius-pill: 999px;
       --max: 1180px;
     }
 
@@ -161,7 +162,7 @@
       justify-self: end;
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 10px;
       color: var(--muted);
       font-size: 12px;
       letter-spacing: .08em;
@@ -175,11 +176,39 @@
       font-size: 12px;
       letter-spacing: .08em;
       text-transform: uppercase;
+      transition: color .2s ease, transform .2s ease, background .2s ease, border-color .2s ease;
     }
 
     .top-links button:hover,
     .top-links a:hover {
       color: var(--ink);
+    }
+
+    .nav-button {
+      padding: 10px 0;
+    }
+
+    .instagram-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border: 1px solid rgba(23,19,15,.10);
+      border-radius: var(--radius-pill);
+      background: rgba(255,255,255,.22);
+    }
+
+    .instagram-link:hover {
+      background: rgba(255,255,255,.38);
+      border-color: rgba(23,19,15,.18);
+      transform: translateY(-1px);
+    }
+
+    .ig-icon {
+      width: 16px;
+      height: 16px;
+      flex: 0 0 auto;
+      display: block;
     }
 
     .hero {
@@ -631,6 +660,23 @@
       opacity: .5;
     }
 
+    .footer-instagram {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border: 1px solid rgba(23,19,15,.10);
+      border-radius: var(--radius-pill);
+      background: rgba(255,255,255,.18);
+      transition: color .2s ease, transform .2s ease, background .2s ease, border-color .2s ease;
+    }
+
+    .footer-instagram:hover {
+      background: rgba(255,255,255,.32);
+      border-color: rgba(23,19,15,.18);
+      transform: translateY(-1px);
+    }
+
     .modal-backdrop {
       position: fixed;
       inset: 0;
@@ -725,7 +771,8 @@
       .topbar { padding: 14px; }
       .brand-main { font-size: 22px; }
       .brand-sub { display: none; }
-      .top-links { gap: 10px; }
+      .top-links { gap: 8px; }
+      .instagram-link { padding: 8px 10px; }
       .hero-card { transform: none; }
       .hero-card-inner { min-height: 300px; }
       .post-media, .post-media img { min-height: 250px; }
@@ -757,7 +804,7 @@
         <div>
           <span class="hero-kicker" id="heroKicker">by Murat Akcayigit</span>
           <h1 id="heroTitle">Muratomo<br>Haiku</h1>
-          <p class="hero-copy" id="heroCopy">drawings · notes · small reflections</p>
+          <p class="hero-copy" id="heroCopy">çizimler · notlar · küçük yansımalar</p>
         </div>
 
         <aside class="hero-card" aria-label="Featured note">
@@ -792,9 +839,16 @@ sessizce</div>
 
     <footer class="footer">
       <div class="footer-left">
-        <a href="https://www.instagram.com/murattakc/" target="_blank" rel="noopener noreferrer">Instagram</a>
+        <a class="footer-instagram" href="https://www.instagram.com/murattakc/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <svg class="ig-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <rect x="3.5" y="3.5" width="17" height="17" rx="5" stroke="currentColor" stroke-width="1.8"/>
+            <circle cx="12" cy="12" r="4.1" stroke="currentColor" stroke-width="1.8"/>
+            <circle cx="17.3" cy="6.7" r="1.1" fill="currentColor"/>
+          </svg>
+          <span>Instagram</span>
+        </a>
         <span class="footer-dot">·</span>
-        <span id="footerLine">drawings, notes, and small reflections</span>
+        <span id="footerLine">çizimler · notlar · küçük yansımalar</span>
       </div>
       <div>© Murat Akcayigit</div>
     </footer>
@@ -827,26 +881,36 @@ sessizce</div>
         brand_name: "Muratomo Haiku",
         brand_sub: { tr: "by Murat Akcayigit", en: "by Murat Akcayigit" },
         hero_kicker: { tr: "by Murat Akcayigit", en: "by Murat Akcayigit" },
-        hero_copy: { tr: "drawings · notes · small reflections", en: "drawings · notes · small reflections" },
+        hero_copy: {
+          tr: "çizimler · notlar · küçük yansımalar",
+          en: "drawings · notes · small reflections"
+        },
         featured_title: "Muratomo Haiku",
-        featured_note: { tr: "boş bir sayfa / yeni izleri bekler / sessizce", en: "an empty page / waits for new traces / quietly" },
+        featured_note: {
+          tr: "boş bir sayfa / yeni izleri bekler / sessizce",
+          en: "an empty page / waits for new traces / quietly"
+        },
         filter_title: { tr: "Kılavuz kelimeler", en: "Guide words" },
-        side_note: { tr: "Kategoriler değil; izler. Bir kelimeye dokununca akış sadece o ruh halindeki işleri gösterir.", en: "Not categories; traces. Touching a word narrows the stream to that mood, material, or question." },
+        side_note: {
+          tr: "Kategoriler değil; izler. Bir kelimeye dokununca akış sadece o ruh halindeki işleri gösterir.",
+          en: "Not categories; traces. Touching a word narrows the stream to that mood, material, or question."
+        },
         stream_title: { tr: "Akış", en: "Stream" },
-        empty_state: { tr: "Henüz bir iz yok. /admin alanından ilk gönderiyi ekle.", en: "No traces yet. Add the first entry from /admin." },
+        empty_state: {
+          tr: "Henüz bir iz yok. /admin alanından ilk gönderiyi ekle.",
+          en: "No traces yet. Add the first entry from /admin."
+        },
         read_more: { tr: "içine gir", en: "enter" },
         back: { tr: "akışa dön", en: "back to stream" },
         entries: { tr: "iz", en: "entries" },
-        footer_line: { tr: "drawings, notes, and small reflections", en: "drawings, notes, and small reflections" }
+        footer_line: {
+          tr: "çizimler · notlar · küçük yansımalar",
+          en: "drawings · notes · small reflections"
+        }
       },
       nav: {
-        work: { tr: "Work", en: "Work" },
-        notes: { tr: "Notes", en: "Notes" },
-        about: { tr: "About", en: "About" },
-        instagram: { tr: "Instagram", en: "Instagram" },
-        info: { tr: "Bilgi", en: "Info" },
-        privacy: { tr: "Gizlilik", en: "Privacy Policy" },
-        contact: { tr: "İletişim", en: "Contact" }
+        about: { tr: "Hakkında", en: "About" },
+        instagram: { tr: "Instagram", en: "Instagram" }
       },
       section_labels: {
         technique: { tr: "Teknik", en: "Technique" },
@@ -865,10 +929,13 @@ sessizce</div>
         { id: "haiku", tr: "Haiku", en: "Haiku" }
       ],
       pages: {
-        info: { title: { tr: "Bilgi", en: "Info" }, body: { tr: "<p>Muratomo Haiku, kategori mantığından çok iz mantığıyla çalışan kişisel bir akış.</p>", en: "<p>Muratomo Haiku is a personal stream organized by traces rather than strict categories.</p>" } },
-        about: { title: { tr: "About", en: "About" }, body: { tr: "<p>Muratomo Haiku, Murat Akcayigit'in çizim, not, obje ve kısa iç yansımaları için sessiz bir dijital oda.</p><p>Burada işler kategori gibi değil; iz, duygu, teknik ve küçük dönüşüm parçaları gibi durur.</p>", en: "<p>Muratomo Haiku is a quiet digital room for Murat Akcayigit's drawings, notes, objects, and short inner reflections.</p><p>The works live here less as categories, and more as traces, moods, techniques, and small transformations.</p>" } },
-        privacy: { title: { tr: "Gizlilik", en: "Privacy Policy" }, body: { tr: "<p>Bu site ilk halinde takip çerezi, üyelik sistemi veya reklam ağı kullanmaz.</p>", en: "<p>This site does not use tracking cookies, member accounts, or ad networks in its first version.</p>" } },
-        contact: { title: { tr: "İletişim", en: "Contact" }, body: { tr: "<p>Instagram üzerinden ulaşabilirsin: <a href='https://www.instagram.com/murattakc/' target='_blank' rel='noopener noreferrer'>@murattakc</a></p>", en: "<p>You can reach me on Instagram: <a href='https://www.instagram.com/murattakc/' target='_blank' rel='noopener noreferrer'>@murattakc</a></p>" } }
+        about: {
+          title: { tr: "Hakkında", en: "About" },
+          body: {
+            tr: "<p>Muratomo Haiku, Murat Akcayigit'in çizim, not, obje ve kısa iç yansımaları için sessiz bir dijital oda.</p><p>Burada işler kategori gibi değil; iz, duygu, teknik ve küçük dönüşüm parçaları gibi durur.</p>",
+            en: "<p>Muratomo Haiku is a quiet digital room for Murat Akcayigit's drawings, notes, objects, and short inner reflections.</p><p>The works live here less as categories, and more as traces, moods, techniques, and small transformations.</p>"
+          }
+        }
       }
     };
 
@@ -950,16 +1017,23 @@ sessizce</div>
         .filter((post) => currentFilter === "all" || (post.tags || []).includes(currentFilter));
     }
 
+    function trEnLine() {
+      return currentLang === "tr"
+        ? "çizimler · notlar · küçük yansımalar"
+        : "drawings · notes · small reflections";
+    }
+
     function updateStaticText() {
       const site = siteData.site;
       qs("#brandName").textContent = site.brand_name || "Muratomo Haiku";
       qs("#brandSub").textContent = "by Murat Akcayigit";
       qs("#heroKicker").textContent = "by Murat Akcayigit";
       qs("#heroTitle").innerHTML = (site.brand_name || "Muratomo Haiku").replace(" ", "<br>");
-      qs("#heroCopy").textContent = "drawings · notes · small reflections";
+      qs("#heroCopy").textContent = trEnLine();
 
       const lineBreak = String.fromCharCode(10);
       const carriageReturn = String.fromCharCode(13);
+
       qs("#featuredTitle").innerHTML = String(site.featured_title || "Muratomo Haiku")
         .split(carriageReturn).join("")
         .split(lineBreak).join("<br>");
@@ -967,7 +1041,7 @@ sessizce</div>
       qs("#featuredNote").textContent = t(site.featured_note);
       qs("#filterTitle").textContent = t(site.filter_title);
       qs("#sideNote").textContent = t(site.side_note);
-      qs("#footerLine").textContent = "drawings, notes, and small reflections";
+      qs("#footerLine").textContent = trEnLine();
 
       document.documentElement.lang = currentLang;
       document.documentElement.dataset.lang = currentLang;
@@ -976,32 +1050,23 @@ sessizce</div>
       });
     }
 
-    function scrollToWorks() {
-      const target = qs("#works");
-      if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-
-    function goToNotes() {
-      currentFilter = "haiku";
-      render();
-      scrollToWorks();
-    }
-
     function renderTopLinks() {
       topLinks.innerHTML = `
-        <button type="button" data-action="work">${t(siteData.nav.work, "Work")}</button>
-        <button type="button" data-action="notes">${t(siteData.nav.notes, "Notes")}</button>
-        <button type="button" data-page="about">${t(siteData.nav.about, "About")}</button>
-        <a href="${instagramUrl}" target="_blank" rel="noopener noreferrer">${t(siteData.nav.instagram, "Instagram")}</a>
+        <button class="nav-button" type="button" data-page="about">${t(siteData.nav.about, "About")}</button>
+        <a class="instagram-link" href="${instagramUrl}" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <svg class="ig-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <rect x="3.5" y="3.5" width="17" height="17" rx="5" stroke="currentColor" stroke-width="1.8"/>
+            <circle cx="12" cy="12" r="4.1" stroke="currentColor" stroke-width="1.8"/>
+            <circle cx="17.3" cy="6.7" r="1.1" fill="currentColor"/>
+          </svg>
+          <span>${t(siteData.nav.instagram, "Instagram")}</span>
+        </a>
       `;
 
-      const workButton = topLinks.querySelector('[data-action="work"]');
-      const notesButton = topLinks.querySelector('[data-action="notes"]');
       const aboutButton = topLinks.querySelector('[data-page="about"]');
-
-      if (workButton) workButton.addEventListener("click", scrollToWorks);
-      if (notesButton) notesButton.addEventListener("click", goToNotes);
-      if (aboutButton) aboutButton.addEventListener("click", () => openModal("about"));
+      if (aboutButton) {
+        aboutButton.addEventListener("click", () => openModal("about"));
+      }
     }
 
     function renderFilters() {
@@ -1011,6 +1076,7 @@ sessizce</div>
           <span class="dot" aria-hidden="true"></span>
         </button>
       `).join("");
+
       filterList.querySelectorAll("[data-filter]").forEach((button) => {
         button.addEventListener("click", () => {
           currentFilter = button.dataset.filter;
@@ -1063,9 +1129,11 @@ sessizce</div>
     function showDetail(id) {
       const post = (postsData.posts || []).find((item) => item.id === id);
       if (!post) return;
+
       const title = t(post.title, "Untitled");
       const tags = post.tags || [];
       const gallery = (post.gallery_images || []).filter(Boolean);
+
       homeView.style.display = "none";
       detailView.classList.add("active");
       detailView.innerHTML = `
@@ -1086,6 +1154,7 @@ sessizce</div>
           </aside>
         </section>
       `;
+
       qs("#backButton").addEventListener("click", showHome);
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
@@ -1111,7 +1180,9 @@ sessizce</div>
       modalBackdrop.classList.add("active");
     }
 
-    function closeModal() { modalBackdrop.classList.remove("active"); }
+    function closeModal() {
+      modalBackdrop.classList.remove("active");
+    }
 
     function render() {
       updateStaticText();
@@ -1131,7 +1202,9 @@ sessizce</div>
     window.setLanguage = setLanguage;
 
     qs("#closeModal").addEventListener("click", closeModal);
-    modalBackdrop.addEventListener("click", (event) => { if (event.target === modalBackdrop) closeModal(); });
+    modalBackdrop.addEventListener("click", (event) => {
+      if (event.target === modalBackdrop) closeModal();
+    });
 
     loadContent();
   </script>
